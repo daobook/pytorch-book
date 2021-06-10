@@ -1,0 +1,15 @@
+numpy
+pandas
+matplotlib
+ipywidgets
+# nbclient
+jupyter-book
+ghp-import
+sphinx_inline_tabs
+# sphinx
+# sphinx-click
+# sphinx_inline_tabs
+# sphinxext-rediraffe
+# sympy
+# jupyter-dash
+plotly

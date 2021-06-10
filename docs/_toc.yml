@@ -1,0 +1,10 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book  # Tells Jupyter Book what kind of structure to expect
+root: index # A path to the *root page* (landing page) of your book
+parts:
+- caption: 案例
+  chapters:
+  - file: markdown
+  - file: notebooks
