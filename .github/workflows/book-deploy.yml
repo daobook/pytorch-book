@@ -39,7 +39,8 @@ jobs:
       run: |
         pip install -r etc/requirements.txt
         conda install ipykernel
-        python -m ipykernel install --user --name ai --display-name "ai"
+        python -m ipykernel install --user --name torch --display-name "PyTorch"
+        
     - name: Install theme
       run: |
         git clone https://github.com/xinetzone/xin-css.git docs/_static/xin-css
@@ -48,7 +49,6 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        pip install jupyter-book==0.11.0a1
         jupyter-book build docs
 
     # Deploy the book's HTML to gh-pages branch

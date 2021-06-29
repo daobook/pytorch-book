@@ -131,3 +131,9 @@ dmypy.json
 # css
 xin-css/
 w3css/
+
+# model
+models/
+draft/
+datasets/
+*.pt
