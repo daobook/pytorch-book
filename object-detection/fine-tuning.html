@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>微调</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/w3css/4/w3mobile.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/w3css/4/w3pro.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/w3css/4/w3.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xin-css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "xinetzone/pytorch-book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://xinetzone.github.io/pytorch-book/object-detection/fine-tuning.html" />
+    <link rel="shortcut icon" href="../_static/page-logo.jfif"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="参考" href="../reference/index.html" />
+    <link rel="prev" title="训练自定义数据 📌" href="01_yolov5-train-custom-datasets.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  基础
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../start/index.html">
+   PyTorch 基础
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../start/00_quickly-study.html">
+     快速入门
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../start/01_tensor.html">
+     张量
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../start/02_data.html">
+     Dataset 和 Dataloader
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../start/03_transforms.html">
+     变换
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../start/04_build-model.html">
+     构建神经网络
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../start/05_autograd.html">
+     自动微分
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  计算机视觉
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   目标检测
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="00_YOLOv5.html">
+     YOLOV5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_yolov5-train-custom-datasets.html">
+     训练自定义数据 📌
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     微调
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  帮助
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../reference/index.html">
+   参考
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reference/object-detection.html">
+     目标检测参考
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../glossary/index.html">
+   术语表
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../glossary/numpy.html">
+     NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../glossary/pytorch.html">
+     PyTorch 词汇表
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div class="w3-padding w3-card-4 w3-pale-green">
+  <a href="https://github.com/xinetzone" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub"
+      data-position="top" data-delay="50">
+      <i class="fab fa-github"></i>
+  </a>
+  <a href="mailto:q735613050@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top"
+      data-delay="50">
+      <i class="fas fa-envelope-open"></i>
+  </a>
+  <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=735613050" class="tooltipped"
+      target="_blank" data-tooltip="QQ联系我: 735613050" data-position="top" data-delay="50">
+      <i class="fab fa-qq"></i>
+  </a>
+  <a href="https://www.zhihu.com/people/liu-xin-wei-55" class="tooltipped" target="_blank"
+      data-tooltip="关注我的知乎: liu-xin-wei-55" data-position="top" data-delay="50">
+      <i class="fab fa-zhihu1">知</i>
+  </a>
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/xinet" class="tooltipped"
+      data-tooltip="领英联系我: xinet" data-position="top" data-delay="50">
+      <i class="fab fa-linkedin"></i>
+  </a>
+  <div><a href="https://github.com/xinetzone/pytorch-book">PyTorch Book</a> 版权所有</div>
+</div> 
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/object-detection/fine-tuning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/xinetzone/pytorch-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/xinetzone/pytorch-book/issues/new?title=Issue%20on%20page%20%2Fobject-detection/fine-tuning.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/xinetzone/pytorch-book/edit/main/docs/object-detection/fine-tuning.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/xinetzone/pytorch-book/main?urlpath=tree/docs/object-detection/fine-tuning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   定义数据集
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pennfudan">
+   为 PennFudan 编写自定义数据集
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   定义模型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     1. 从预先训练的模型进行微调
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     2 修改模型，以添加不同的骨干
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     基于 PennFudan 数据集的实例分割模型
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   把每个组件组合在一起
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="id1">
+<h1>微调<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>参考：<a class="reference external" href="https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html">TorchVision Object Detection Finetuning Tutorial</a></p>
+<p>在 <a class="reference external" href="https://www.cis.upenn.edu/~jshi/ped_html/">Penn-Fudan 数据库</a> 中对行人检测和分割预训练的 <a class="reference external" href="https://arxiv.org/abs/1703.06870">Mask R-CNN</a> 模型进行微调。它包含 170 个图像 345 个实例的行人，使用它来说明如何在 <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> 中使用新的特征，以训练一个自定义数据集上的实例分割模型。</p>
+<div class="section" id="id2">
+<h2>定义数据集<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>用于训练对象检测、实例分割和人员关键点检测的参考脚本允许轻松地支持添加新的自定义数据集。数据集应该继承标准的 <code class="docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> 类，并实现 <code class="docutils literal notranslate"><span class="pre">__len__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>。</p>
+<p>唯一需要的指定的是数据集 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> 应该返回：</p>
+<ul class="simple">
+<li><p>image：PIL 图片尺寸 <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W)</span></code></p></li>
+<li><p>target：一个包含以下字段的字典。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">boxes</span></code> (<code class="docutils literal notranslate"><span class="pre">FloatTensor[N,</span> <span class="pre">4]</span></code>)：<code class="docutils literal notranslate"><span class="pre">N</span></code> 个边界框的坐标为 <code class="docutils literal notranslate"><span class="pre">[x0,</span> <span class="pre">y0,</span> <span class="pre">x1,</span> <span class="pre">y1]</span></code> 格式，取值范围为 <span class="math notranslate nohighlight">\([0, W) \times [0, H)\)</span>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">labels</span></code> (<code class="docutils literal notranslate"><span class="pre">Int64Tensor[N]</span></code>)：每个边界框的标签。<code class="docutils literal notranslate"><span class="pre">0</span></code> 表示始终是背景类。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image_id</span></code> (<code class="docutils literal notranslate"><span class="pre">Int64Tensor[1]</span></code>)：一个图像标识符。它应该在数据集中的所有图像之间是唯一的，并在评估期间使用。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">area</span></code> (<code class="docutils literal notranslate"><span class="pre">Tensor[N]</span></code>)：边界框的面积。这是在使用 COCO 度量进行评估时使用的，用于分隔小、中、大盒子之间的度量分数。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iscrowd</span></code> (<code class="docutils literal notranslate"><span class="pre">UInt8Tensor[N]</span></code>): <code class="docutils literal notranslate"><span class="pre">iscrowd=True</span></code> 的实例在计算时会被忽略。</p></li>
+<li><p>（可选）<code class="docutils literal notranslate"><span class="pre">mask</span></code> (<code class="docutils literal notranslate"><span class="pre">UInt8Tensor[N,</span> <span class="pre">H,</span> <span class="pre">W]</span></code>):每个对象的分割掩码。</p></li>
+<li><p>（可选）<code class="docutils literal notranslate"><span class="pre">keypoints</span></code> (<code class="docutils literal notranslate"><span class="pre">FloatTensor[N,</span> <span class="pre">K,</span> <span class="pre">3]</span></code>):对于 <code class="docutils literal notranslate"><span class="pre">N</span></code> 个对象中的每一个，它包含了 <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">visibility]</span></code> 格式的 <code class="docutils literal notranslate"><span class="pre">K</span></code> 个关键点，定义了对象。<code class="docutils literal notranslate"><span class="pre">visibility=0</span></code> 表示关键点不可见。注意，对于数据扩展，翻转关键点的概念取决于数据表示，您可能应该为新的关键点表示调整 <code class="docutils literal notranslate"><span class="pre">references/detection/transforms.py</span></code>。</p></li>
+</ul>
+</li>
+</ul>
+<p>如果您的模型返回上述方法，它们将使其同时适用于训练和评估，并将使用来自 <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> 的评估脚本，这些脚本可以与 <code class="docutils literal notranslate"><span class="pre">pip</span></code> 安装 <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> 一起安装。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>对于 Windows，请使用命令从 <code class="docutils literal notranslate"><span class="pre">gautamchitnis</span></code> 安装 <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code>：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/gautamchitnis/cocoapi.git@cocodataset-master#subdirectory<span class="o">=</span>PythonAPI
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">labels</span></code>上有一个注意事项。模型将第 <code class="docutils literal notranslate"><span class="pre">0</span></code> 类作为背景。如果数据集不包含背景类，则标签中不应该有 <code class="docutils literal notranslate"><span class="pre">0</span></code>。例如，假设您只有两个类，<code class="docutils literal notranslate"><span class="pre">cat</span></code> 和 <code class="docutils literal notranslate"><span class="pre">dog</span></code>，您可以定义 <code class="docutils literal notranslate"><span class="pre">1</span></code>（不是 <code class="docutils literal notranslate"><span class="pre">0</span></code>）表示猫，<code class="docutils literal notranslate"><span class="pre">2</span></code> 表示狗。所以，例如，如果一个图像同时具有两个类，你的标签张量应该看起来像 <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code>。</p>
+<p>此外，如果想在训练期间使用高宽比分组（以便每批只包含具有相似高宽比的图像），那么建议也实现一个 <code class="docutils literal notranslate"><span class="pre">get_height_and_width</span></code> 方法，它返回图像的高度和宽度。如果没有提供此方法，可以通过 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> 查询数据集的所有元素，它将在内存中加载图像，比提供自定义方法要慢。</p>
+</div>
+<div class="section" id="pennfudan">
+<h2>为 PennFudan 编写自定义数据集<a class="headerlink" href="#pennfudan" title="永久链接至标题">¶</a></h2>
+<p><a class="reference external" href="https://www.cis.upenn.edu/~jshi/ped_html/PennFudanPed.zip">下载并解压 zip 文件</a> 后，有以下文件夹结构：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>PennFudanPed/
+  PedMasks/
+    FudanPed00001_mask.png
+    FudanPed00002_mask.png
+    FudanPed00003_mask.png
+    FudanPed00004_mask.png
+    ...
+  PNGImages/
+    FudanPed00001.png
+    FudanPed00002.png
+    FudanPed00003.png
+    FudanPed00004.png
+</pre></div>
+</div>
+<p>这是一对图像和分割蒙版的一个例子：</p>
+<p><img alt="" src="../_images/ee.png" /></p>
+<p>所以每个图像都有一个对应的分割蒙版，其中每个颜色对应一个不同的实例。为这个数据集编写一个 <code class="docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> 类。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+
+<span class="k">class</span> <span class="nc">PennFudanDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">transforms</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">transforms</span>
+        <span class="c1"># load all image files, sorting them to</span>
+        <span class="c1"># ensure that they are aligned</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PNGImages&quot;</span><span class="p">))))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">masks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PedMasks&quot;</span><span class="p">))))</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="c1"># load images and masks</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PNGImages&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">mask_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PedMasks&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">masks</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="c1"># note that we haven&#39;t converted the mask to RGB,</span>
+        <span class="c1"># because each color corresponds to a different instance</span>
+        <span class="c1"># with 0 being background</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mask_path</span><span class="p">)</span>
+        <span class="c1"># convert the PIL Image into a numpy array</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="c1"># instances are encoded as different colors</span>
+        <span class="n">obj_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="c1"># first id is the background, so remove it</span>
+        <span class="n">obj_ids</span> <span class="o">=</span> <span class="n">obj_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># split the color-encoded mask into a set</span>
+        <span class="c1"># of binary masks</span>
+        <span class="n">masks</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">==</span> <span class="n">obj_ids</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="c1"># get bounding box coordinates for each mask</span>
+        <span class="n">num_objs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_ids</span><span class="p">)</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_objs</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">xmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">xmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">ymin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+
+        <span class="c1"># convert everything into a torch.Tensor</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="c1"># there is only one class</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">num_objs</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="n">masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">masks</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+        <span class="n">image_id</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="n">boxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">boxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># suppose all instances are not crowd</span>
+        <span class="n">iscrowd</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_objs</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+        <span class="n">target</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boxes</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;masks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">masks</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;image_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_id</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">area</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;iscrowd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iscrowd</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>这就是数据集的全部内容。现在，定义一个可以对这个数据集执行预测的模型。</p>
+</div>
+<div class="section" id="id3">
+<h2>定义模型<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>使用 <a class="reference external" href="https://arxiv.org/abs/1703.06870">Mask R-CNN</a>，它是基于 <a class="reference external" href="https://arxiv.org/abs/1506.01497">Faster R-CNN</a> 的。Faster R-CNN 是一种模型，可以预测图像中潜在物体的边界框和类分数。</p>
+<p><img alt="" src="../_images/tv_image03.png" /></p>
+<p>Mask R-CNN 增加了一个额外的分支到 Faster R-CNN，它也预测每个实例的分割掩码。</p>
+<p><img alt="" src="../_images/tv_image04.png" /></p>
+<p>有两种常见的情况，人们可能想要修改 torchvision modelzoo 中的一个可用模型。第一个是当我们想从一个预先训练的模型开始，只是微调最后一层。另一种是当我们想要用一个不同的模型替换模型的主干时（例如，为了更快的预测）。</p>
+<p>让我们看看在接下来的部分中我们将如何完成这两个步骤。</p>
+<div class="section" id="id4">
+<h3>1. 从预先训练的模型进行微调<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>让我们假设您希望从一个经过 COCO 训练的模型开始，并希望针对特定的类对其进行微调。下面是一种可能的方法：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.faster_rcnn</span> <span class="k">import</span> <span class="n">FastRCNNPredictor</span>
+
+<span class="c1"># load a model pre-trained pre-trained on COCO</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">detection</span><span class="o">.</span><span class="n">fasterrcnn_resnet50_fpn</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># replace the classifier with a new one, that has</span>
+<span class="c1"># num_classes which is user-defined</span>
+<span class="n">num_classes</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 1 class (person) + background</span>
+<span class="c1"># get number of input features for the classifier</span>
+<span class="n">in_features</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span><span class="o">.</span><span class="n">cls_score</span><span class="o">.</span><span class="n">in_features</span>
+<span class="c1"># replace the pre-trained head with a new one</span>
+<span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span> <span class="o">=</span> <span class="n">FastRCNNPredictor</span><span class="p">(</span><span class="n">in_features</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>2 修改模型，以添加不同的骨干<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection</span> <span class="k">import</span> <span class="n">FasterRCNN</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.rpn</span> <span class="k">import</span> <span class="n">AnchorGenerator</span>
+
+<span class="c1"># load a pre-trained model for classification and return</span>
+<span class="c1"># only the features</span>
+<span class="n">backbone</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">mobilenet_v2</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">features</span>
+<span class="c1"># FasterRCNN needs to know the number of</span>
+<span class="c1"># output channels in a backbone. For mobilenet_v2, it&#39;s 1280</span>
+<span class="c1"># so we need to add it here</span>
+<span class="n">backbone</span><span class="o">.</span><span class="n">out_channels</span> <span class="o">=</span> <span class="mi">1280</span>
+
+<span class="c1"># let&#39;s make the RPN generate 5 x 3 anchors per spatial</span>
+<span class="c1"># location, with 5 different sizes and 3 different aspect</span>
+<span class="c1"># ratios. We have a Tuple[Tuple[int]] because each feature</span>
+<span class="c1"># map could potentially have different sizes and</span>
+<span class="c1"># aspect ratios</span>
+<span class="n">anchor_generator</span> <span class="o">=</span> <span class="n">AnchorGenerator</span><span class="p">(</span><span class="n">sizes</span><span class="o">=</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">),),</span>
+                                   <span class="n">aspect_ratios</span><span class="o">=</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),))</span>
+
+<span class="c1"># let&#39;s define what are the feature maps that we will</span>
+<span class="c1"># use to perform the region of interest cropping, as well as</span>
+<span class="c1"># the size of the crop after rescaling.</span>
+<span class="c1"># if your backbone returns a Tensor, featmap_names is expected to</span>
+<span class="c1"># be [0]. More generally, the backbone should return an</span>
+<span class="c1"># OrderedDict[Tensor], and in featmap_names you can choose which</span>
+<span class="c1"># feature maps to use.</span>
+<span class="n">roi_pooler</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">MultiScaleRoIAlign</span><span class="p">(</span><span class="n">featmap_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">],</span>
+                                                <span class="n">output_size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                                                <span class="n">sampling_ratio</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># put the pieces together inside a FasterRCNN model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">FasterRCNN</span><span class="p">(</span><span class="n">backbone</span><span class="p">,</span>
+                   <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                   <span class="n">rpn_anchor_generator</span><span class="o">=</span><span class="n">anchor_generator</span><span class="p">,</span>
+                   <span class="n">box_roi_pool</span><span class="o">=</span><span class="n">roi_pooler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>基于 PennFudan 数据集的实例分割模型<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>在我们的例子中，我们希望从一个预先训练的模型进行微调，因为我们的数据集非常小，所以我们将采用第1种方法。</p>
+<p>这里我们还想计算实例分割掩码，所以我们将使用 Mask R-CNN：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.faster_rcnn</span> <span class="k">import</span> <span class="n">FastRCNNPredictor</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.mask_rcnn</span> <span class="k">import</span> <span class="n">MaskRCNNPredictor</span>
+
+
+<span class="k">def</span> <span class="nf">get_model_instance_segmentation</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
+    <span class="c1"># load an instance segmentation model pre-trained pre-trained on COCO</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">detection</span><span class="o">.</span><span class="n">maskrcnn_resnet50_fpn</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># get number of input features for the classifier</span>
+    <span class="n">in_features</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span><span class="o">.</span><span class="n">cls_score</span><span class="o">.</span><span class="n">in_features</span>
+    <span class="c1"># replace the pre-trained head with a new one</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span> <span class="o">=</span> <span class="n">FastRCNNPredictor</span><span class="p">(</span><span class="n">in_features</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+
+    <span class="c1"># now get the number of input features for the mask classifier</span>
+    <span class="n">in_features_mask</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">mask_predictor</span><span class="o">.</span><span class="n">conv5_mask</span><span class="o">.</span><span class="n">in_channels</span>
+    <span class="n">hidden_layer</span> <span class="o">=</span> <span class="mi">256</span>
+    <span class="c1"># and replace the mask predictor with a new one</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">mask_predictor</span> <span class="o">=</span> <span class="n">MaskRCNNPredictor</span><span class="p">(</span><span class="n">in_features_mask</span><span class="p">,</span>
+                                                       <span class="n">hidden_layer</span><span class="p">,</span>
+                                                       <span class="n">num_classes</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>就是这样，这将使模型准备好训练和评估您的自定义数据集。</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>把每个组件组合在一起<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>在 <code class="docutils literal notranslate"><span class="pre">references/detection/</span></code> 中，有许多辅助函数来简化训练和评估检测模型。这里，我们将使用 <code class="docutils literal notranslate"><span class="pre">references/detection/engine.py</span></code>、 <code class="docutils literal notranslate"><span class="pre">references/detection/utils.py</span></code> 和 <code class="docutils literal notranslate"><span class="pre">references/detection/transforms.py</span></code>。只需要将 <code class="docutils literal notranslate"><span class="pre">references/detection</span> </code> 下的所有内容复制到你的文件夹中，并在这里使用它们。</p>
+<p>让我们编写一些辅助函数用于数据增强/转换：</p>
+<p>待更.....</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "xinetzone/pytorch-book",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "torch"
+        },
+        kernelOptions: {
+            kernelName: "torch",
+            path: "./object-detection"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'torch'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="01_yolov5-train-custom-datasets.html" title="previous page">训练自定义数据 📌</a>
+    <a class='right-next' id="next-link" href="../reference/index.html" title="next page">参考</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By xinetzone<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
