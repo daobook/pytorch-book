@@ -16,9 +16,9 @@ parts:
     - glob: object-detection/**
 - caption: 帮助
   chapters:
-  - file: reference/index
+  - file: other/index
     sections:
-    - glob: reference/**
+    - glob: other/**
   - file: glossary/index
     sections:
       - glob: glossary/**
