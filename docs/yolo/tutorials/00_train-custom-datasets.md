@@ -1,139 +1,118 @@
-# 训练自定义数据
+# 自定义数据 📌
 
-📚 This guide explains how to train your own **custom dataset** with YOLOv5 🚀.
+📚本指南解释了如何使用YOLOv5🚀训练自定义数据集。
 
-## Before You Start
+## 训练
 
-Clone this repo, download tutorial dataset, and install [requirements.txt](https://github.com/ultralytics/yolov5/blob/master/requirements.txt) dependencies, including **Python>=3.8** and **PyTorch>=1.7**.
+设置训练配置。
 
-```bash
-$ git clone https://github.com/ultralytics/yolov5  # clone repo
-$ cd yolov5
-$ pip install -r requirements.txt  # install
+### 创建 `dataset.yaml`
+
+[COCO128](https://www.kaggle.com/ultralytics/coco128) 是一个小型教程数据集，由 [COCO](http://cocodataset.org/#home) train2017 中的前 128 张图像组成。这些相同的 128 幅图像用于训练和验证，以验证我们的训练管道能够过拟合。[`data/coco128.yaml`](https://github.com/ultralytics/yolov5/blob/master/data/coco128.yaml) 是数据集配置文件它定义了：
+
+1. 可选下载命令/ 自动下载的 URL；
+2. 训练图像路的目录（或训练图片路径列表的 `*.txt` 文件）；
+3. 验证图片的目录（或验证图片路径列表的 `*.txt` 文件）；
+4. 类的数量；
+5. 类名称的列表
+
+```{literalinclude} ./opts/coco128.yml
+:language: yaml
 ```
 
-## Train On Custom Data
+### 创建标签
 
-### 1. Create dataset.yaml
+在使用  [CVAT](https://github.com/opencv/cvat)、[makesense.ai](https://www.makesense.ai/) 或者 [Labelbox](https://labelbox.com/) 标注你的图片，输出你的标签为 **YOLO 格式**，每幅图像一个 `*.txt` 文件（如果图像中没有对象，则不需要 `*.txt` 文件）。`*.txt` 文件规格如下:
 
-[COCO128](https://www.kaggle.com/ultralytics/coco128) is a small tutorial dataset composed of the first 128 images in [COCO](http://cocodataset.org/#home) train2017. These same 128 images are used for both training and validation to verify our training pipeline is capable of overfitting. [data/coco128.yaml](https://github.com/ultralytics/yolov5/blob/master/data/coco128.yaml), shown below, is the dataset configuration file that defines 1) an optional download command/URL for auto-downloading, 2) a path to a directory of training images (or path to a *.txt file with a list of training images), 3) the same for our validation images, 4) the number of classes, 5) a list of class names:
-```yaml
-# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
-train: ../coco128/images/train2017/
-val: ../coco128/images/train2017/
+- 每个对象一行
+- 每一行都是 `class x_center y_center width height` 格式。
+- 边框坐标必须是 **归一化的 `xywh`** 格式（从 0 到 1）。如果框以像素为单位，则将 `x_center` 和 `width` 除以图像宽度，`y_center`和 `height` 除以图像高度。
+- 类号是零索引的（从 0 开始)）。
 
-# number of classes
-nc: 80
+![](./images/bbox.jpg)
 
-# class names
-names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
-        'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
-        'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
-        'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard',
-        'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-        'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch',
-        'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 
-        'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 
-        'teddy bear', 'hair drier', 'toothbrush']
-```
+上图所对应的标签文件包含 2 个人（类 `0`）和一条领带（类 `27`）：
 
+![](./images/label.png)
 
-### 2. Create Labels
+### 组织目录
 
-After using a tool like [CVAT](https://github.com/opencv/cvat), [makesense.ai](https://www.makesense.ai/) or [Labelbox](https://labelbox.com/)  to label your images, export your labels to **YOLO format**, with one `*.txt` file per image (if no objects in image, no `*.txt` file is required). The `*.txt` file specifications are:
+根据下面的示例组织您的 `train` 和 `val` 图像和标签。在本例中，我们假设 `/coco128` 位于 `/yolov5` 目录旁边。`YOLOv5` 通过将每个图像路径中的最后一个 `/images/` 实例替换为 `/labels/` 来自动定位每个图像的标签。例如：
 
-- One row per object
-- Each row is `class x_center y_center width height` format.
-- Box coordinates must be in **normalized xywh** format (from 0 - 1). If your boxes are in pixels, divide `x_center` and `width` by image width, and `y_center` and `height` by image height.
-- Class numbers are zero-indexed (start from 0).
-
-<img width="800" alt="Image Labels" src="https://user-images.githubusercontent.com/26833433/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg">
-
-The label file corresponding to the above image contains 2 persons (class `0`) and a tie (class `27`):
-
-<p align="center"><img width="428" src="https://user-images.githubusercontent.com/26833433/112467037-d2568c00-8d66-11eb-8796-55402ac0d62f.png"></p>
-
-
-### 3. Organize Directories
-
-Organize your train and val images and labels according to the example below. In this example we assume `/coco128` is **next to** the `/yolov5` directory. **YOLOv5 locates labels automatically for each image** by replacing the last instance of `/images/` in each image path with `/labels/`. For example: 
-```bash
+```shell
 dataset/images/im0.jpg  # image
 dataset/labels/im0.txt  # label
 ```
 
-<p align="center"><img width="698" src="https://user-images.githubusercontent.com/26833433/112467887-e18a0980-8d67-11eb-93af-6505620ff8aa.png"></p>
+![](./images/organize-dir.png)
 
+### 选择一个模型
 
-### 4. Select a Model
+选择一个预先训练的模型来开始训练。这里选择 [YOLOv5s](https://github.com/ultralytics/yolov5/blob/master/models/yolov5s.yaml)，最小和最快的可用模型。
 
-Select a pretrained model to start training from. Here we select [YOLOv5s](https://github.com/ultralytics/yolov5/blob/master/models/yolov5s.yaml), the smallest and fastest model available. See our README [table](https://github.com/ultralytics/yolov5#pretrained-checkpoints) for a full comparison of all models.
+![YOLOv5 模型比较](../images/model_comparison.png)
 
-<p align="center"><img width="700" alt="YOLOv5 Models" src="https://github.com/ultralytics/yolov5/releases/download/v1.0/model_comparison.png"></p>
+### 训练
 
-### 5. Train
+在 COCO128 上训练 YOLOv5s 模型，指定数据集、批大小、图像大小，或者预训练的 `--weights yolov5s.pt`（推荐），或者随机初始化 `--weights '' --cfg yolov5s.yaml`（不推荐）。预训练的权重可以从[最新的YOLOv5 版本](https://github.com/ultralytics/yolov5/releases)中自动下载。
 
-Train a YOLOv5s model on COCO128 by specifying dataset, batch-size, image size and either pretrained `--weights yolov5s.pt` (recommended), or randomly initialized `--weights '' --cfg yolov5s.yaml` (not recommended). Pretrained weights are auto-downloaded from the [latest YOLOv5 release](https://github.com/ultralytics/yolov5/releases).
-
-```bash
+```shell
 # Train YOLOv5s on COCO128 for 5 epochs
 $ python train.py --img 640 --batch 16 --epochs 5 --data coco128.yaml --weights yolov5s.pt
 ```
 
-All training results are saved to `runs/train/` with incrementing run directories, i.e. `runs/train/exp2`, `runs/train/exp3` etc. For more details see the Training section of our Google Colab Notebook. <a href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <a href="https://www.kaggle.com/ultralytics/yolov5"><img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open In Kaggle"></a>
+所有的训练结果都保存到 `runs/train/`，运行目录是递增的，例如：`runs/train/exp2`, `runs/train/exp3` 等。要了解更多细节，请参阅我们谷歌 Colab 笔记本的训练部分。[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb) [![](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/ultralytics/yolov5)
 
+## 可视化
 
-## Visualize
+### 权重和偏差日志
 
-### Weights & Biases Logging (🚀 NEW)
+[Weight & Bias](https://wandb.ai/site?utm_campaign=repo_yolo_traintutorial)（W&B）现在与 YOLOv5 集成，用于训练运行的实时可视化和云记录。这允许更好的运行比较和内省，以及改进团队成员之间的可见性和协作。要启用 W&B 日志，请安装 `wandb`，然后进行正常训练（您将在第一次使用时得到指导）。
 
-[Weights & Biases](https://wandb.ai/site?utm_campaign=repo_yolo_traintutorial) (W&B) is now integrated with YOLOv5 for real-time visualization and cloud logging of training runs. This allows for better run comparison and introspection, as well improved visibility and collaboration among team members. To enable W&B logging install `wandb`, and then train normally (you will be guided setup on first use).
-```bash
+```shell
 $ pip install wandb
 ```
 
-During training you will see live updates at [https://wandb.ai](https://wandb.ai/site?utm_campaign=repo_yolo_traintutorial), and you can create [Detailed Reports](https://wandb.ai/glenn-jocher/yolov5_tutorial/reports/YOLOv5-COCO128-Tutorial-Results--VmlldzozMDI5OTY) of your results using the W&B Reports tool.
+在训练期间，您将在 <https://wandb.ai> 上看到实时更新，您可以使用 W&B 报告工具创建结果的[详细报告](https://wandb.ai/glenn-jocher/yolov5_tutorial/reports/YOLOv5-COCO128-Tutorial-Results--VmlldzozMDI5OTY)。
 
-<p align="center"><img width="800" src="https://user-images.githubusercontent.com/26833433/112469341-a8eb2f80-8d69-11eb-959a-dd85d3997bcf.jpg"></p>
+![](./images/viz.jpg)
 
+### 本地日志
 
-### Local Logging
+默认情况下，所有结果都被记录到 `runs/train`，为每个新的训练创建一个新的实验目录，如 `runs/train/exp2`、`runs/train/exp3` 等。查看训练和测试 jpgs 可以看到马赛克（mosaics），标签，预测和增强效果。注意，马赛克数据加载器（**Mosaic Dataloader**）用于训练（如下所示），一个由 Ultralytics 首次在 [YOLOv4](https://arxiv.org/abs/2004.10934) 开发的新概念。
 
-All results are logged by default to `runs/train`, with a new experiment directory created for each new training as `runs/train/exp2`, `runs/train/exp3`, etc. View train and test jpgs to see mosaics, labels, predictions and augmentation effects. Note a **Mosaic Dataloader** is used for training (shown below), a new concept developed by Ultralytics and first featured in [YOLOv4](https://arxiv.org/abs/2004.10934).
+`train_batch0.jpg` 显示训练批次 0 的马赛克和标签：
 
+![](./images/train_batch0.jpeg)
 
-`train_batch0.jpg` shows train batch 0 mosaics and labels:  
-> <img src="https://user-images.githubusercontent.com/26833433/83667642-90fcb200-a583-11ea-8fa3-338bbf7da194.jpeg" width="600">
+`test_batch0_labels.jpg` 显示测试批次 0 标签：
 
-`test_batch0_labels.jpg` shows test batch 0 labels:  
-> <img src="https://user-images.githubusercontent.com/26833433/83667626-8c37fe00-a583-11ea-997b-0923fe59b29b.jpeg" width="600">
+![](./images/test_batch0_labels.jpeg)
 
-`test_batch0_pred.jpg` shows test batch 0 _predictions_:  
-> <img src="https://user-images.githubusercontent.com/26833433/83667635-90641b80-a583-11ea-8075-606316cebb9c.jpeg" width="600">
+`test_batch0_pred.jpg` 显示测试批 0 的预测：
 
+![](./images/test_batch0_pred.jpeg)
 
-Training losses and performance metrics are also logged to [Tensorboard](https://www.tensorflow.org/tensorboard) and a custom `results.txt` logfile which is plotted as `results.png` (below) after training completes. Here we show YOLOv5s trained on COCO128 to 300 epochs, starting from scratch (blue), and from pretrained `--weights yolov5s.pt` (orange).
+训练损失和性能指标也被记录到 [Tensorboard](https://www.tensorflow.org/tensorboard) 和一个定制的 `results.txt` 日志文件中，该日志文件在训练完成后绘制为 `results.png`（下图）。在这里，我们展示了训练过 COCO128 到 300 个 epoch 的 YOLOv5s，从头开始（蓝色），以及预训练 `--weights yolov5s.pt`（橙色）。
 
-```python
+```shell
 from utils.plots import plot_results 
 plot_results(save_dir='runs/train/exp')  # plot results.txt as results.png
 ```
 
-<img src="https://user-images.githubusercontent.com/26833433/97808309-8182b180-1c66-11eb-8461-bffe1a79511d.png" width="800">
+![](./images/res.png)
 
+## 环境
 
-## Environments
+YOLOv5 可以在以下任何一个最新验证环境中运行（所有依赖项包括 [CUDA](https://developer.nvidia.com/cuda)/[CUDNN](https://developer.nvidia.com/cudnn), [Python](https://www.python.org/) 和 [PyTorch](https://pytorch.org/) 预安装）：
 
-YOLOv5 may be run in any of the following up-to-date verified environments (with all dependencies including [CUDA](https://developer.nvidia.com/cuda)/[CUDNN](https://developer.nvidia.com/cudnn), [Python](https://www.python.org/) and [PyTorch](https://pytorch.org/) preinstalled):
+- [谷歌 Colab](https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb) 和 [Kaggle 笔记本](https://www.kaggle.com/ultralytics/yolov5)与免费 GPU
+- 谷歌云深度学习虚拟机。见 [GCP 快速入门指南](https://github.com/ultralytics/yolov5/wiki/GCP-Quickstart)
+- 亚马逊深度学习AMI。见 [AWS 快速入门指南](https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart)
+- Docker Image。见 [Docker 快速入门指南](https://github.com/ultralytics/yolov5/wiki/Docker-Quickstart) [![](https://img.shields.io/docker/pulls/ultralytics/yolov5?logo=docker)](https://hub.docker.com/r/ultralytics/yolov5)
 
-- **Google Colab and Kaggle** notebooks with free GPU: <a href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <a href="https://www.kaggle.com/ultralytics/yolov5"><img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open In Kaggle"></a>
-- **Google Cloud** Deep Learning VM. See [GCP Quickstart Guide](https://github.com/ultralytics/yolov5/wiki/GCP-Quickstart)
-- **Amazon** Deep Learning AMI. See [AWS Quickstart Guide](https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart)
-- **Docker Image**. See [Docker Quickstart Guide](https://github.com/ultralytics/yolov5/wiki/Docker-Quickstart) <a href="https://hub.docker.com/r/ultralytics/yolov5"><img src="https://img.shields.io/docker/pulls/ultralytics/yolov5?logo=docker" alt="Docker Pulls"></a>
+## 状态
 
+![](https://github.com/ultralytics/yolov5/workflows/CI%20CPU%20testing/badge.svg)
 
-## Status
-
-![CI CPU testing](https://github.com/ultralytics/yolov5/workflows/CI%20CPU%20testing/badge.svg)
-
-If this badge is green, all [YOLOv5 GitHub Actions](https://github.com/ultralytics/yolov5/actions) Continuous Integration (CI) tests are currently passing. CI tests verify correct operation of YOLOv5 training ([train.py](https://github.com/ultralytics/yolov5/blob/master/train.py)), testing ([test.py](https://github.com/ultralytics/yolov5/blob/master/test.py)), inference ([detect.py](https://github.com/ultralytics/yolov5/blob/master/detect.py)) and export ([export.py](https://github.com/ultralytics/yolov5/blob/master/models/export.py)) on MacOS, Windows, and Ubuntu every 24 hours and on every commit.
+如果此标识为绿色，则当前通过了所有 [YOLOv5 GitHub Actions](https://github.com/ultralytics/yolov5/actions) Continuous Integration（CI）测试。CI 测试在 MacOS、Windows 和 Ubuntu 上每 24 小时和每次提交时验证 YOLOv5 训练（[`train.py`](https://github.com/ultralytics/yolov5/blob/master/train.py)）、测试（[`test.py`](https://github.com/ultralytics/yolov5/blob/master/test.py)）、推断（[`detect.py`](https://github.com/ultralytics/yolov5/blob/master/detect.py)）和导出（[`export.py`](https://github.com/ultralytics/yolov5/blob/master/models/export.py)）的正确操作。

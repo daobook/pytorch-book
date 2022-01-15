@@ -25,9 +25,9 @@ parts:
     - file: yolo/tutorials/index
       sections:
       - glob: yolo/tutorials/**
-    - file: yolo/yolov5/index
+    - file: yolo/face-mask/index
       sections:
-      - glob: yolo/yolov5/**
+      - glob: yolo/face-mask/**
 - caption: 帮助
   chapters:
   - file: other/index

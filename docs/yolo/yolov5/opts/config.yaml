@@ -1,9 +1,0 @@
----
-names:
-- with_mask
-- mask_weared_incorrect
-- without_mask
-nc: 3
-path: E:/kaggle/pytorch-book/docs/yolo/yolov5/datasets/images
-train: train
-val: val
