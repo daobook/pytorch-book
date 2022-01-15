@@ -18,7 +18,6 @@ parts:
     sections:
     - file: yolo/intro
     - file: yolo/quick-start
-    - file: yolo/use
     - file: yolo/environments/index
       sections:
       - glob: yolo/environments/**

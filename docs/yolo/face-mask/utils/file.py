@@ -9,11 +9,11 @@ from sklearn.model_selection import train_test_split
 
 def mkdir(out_dir, overwrite=False):
     out_dir = Path(out_dir)
-    if not out_dir.exists():
+    is_exist = out_dir.exists()
+    if is_exist and overwrite:
+        shutil.rmtree(out_dir)
+    if not is_exist:
         out_dir.mkdir(parents=True, exist_ok=True)
-    else:
-        if overwrite:
-            shutil.rmtree(out_dir)
 
 
 def change_name(path, new_dir, suffix='.txt'):
@@ -130,17 +130,18 @@ class ObjectPath(PathMeta):
                       for label in labels_iter(fp, self.names)]
         labels = '\n'.join(labels)
         label_path = change_name(label_path, new_dir)
+        label_path = Path(label_path)
+        mkdir(label_path.parent)
         with open(label_path, 'w') as fp:
             fp.write(labels)
 
     def _write_labels(self, label_paths, new_dir):
-        new_dir = Path(new_dir)
-        mkdir(new_dir, overwrite=True)
         for label_path in label_paths:
             self.write_label(label_path, new_dir)
 
     def write_labels(self, new_dir):
         new_dir = Path(new_dir)
+        mkdir(new_dir, overwrite=True)
         self._write_labels(self.labels_train, new_dir/'train')
         self._write_labels(self.labels_val, new_dir/'val')
         self._write_labels(self.labels_test, new_dir/'test')
