@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supervisely Ecosystem 🆕</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "xinetzone/pytorch-book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://xinetzone.github.io/pytorch-book/yolo/tutorials/03_supervisely-ecosystem.html" />
+    <link rel="shortcut icon" href="../../_static/page-logo.jfif"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Multi-GPU Training" href="04_multi-gpu-training.html" />
+    <link rel="prev" title="Weights &amp; Biases Logging 🆕" href="02_weights-and-biasis-logging.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索这本书..." aria-label="搜索这本书..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../start/index.html">
+   PyTorch 基础
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/00_quickly-study.html">
+     快速入门
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/01_tensor.html">
+     张量
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/02_data.html">
+     Dataset 和 Dataloader
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/03_transforms.html">
+     变换
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/04_build-model.html">
+     构建神经网络
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/05_autograd.html">
+     自动微分
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  计算机视觉
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../object-detection/index.html">
+   目标检测
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../object-detection/fine-tuning.html">
+     微调
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../index.html">
+   YOLO 系列
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro.html">
+     简介
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../quick-start.html">
+     快速入门
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../use.html">
+     简单使用
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../environments/index.html">
+     环境
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../environments/AWS-Quickstart.html">
+       Amazon Web Services
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../environments/Docker-Quickstart.html">
+       Docker
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../environments/GCP-Quickstart.html">
+       Google Cloud Platform
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="index.html">
+     教程
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="00_train-custom-datasets.html">
+       训练自定义数据
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="01_training-tips-best-results.html">
+       Tips for Best Training Results
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="02_weights-and-biasis-logging.html">
+       Weights &amp; Biases Logging 🆕
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Supervisely Ecosystem 🆕
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="04_multi-gpu-training.html">
+       Multi-GPU Training
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="05_pytorch-hub.html">
+       PyTorch Hub
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="06_torchscript-onnx-coreml-export.html">
+       TorchScript, ONNX, CoreML Export
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="07_test-time-augmentation.html">
+       Test-Time Augmentation (TTA)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="08_model-ensembling.html">
+       Model Ensembling
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="09_pruning-sparsity.html">
+       Model Pruning/Sparsity
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="10_hyperparameter-evolution.html">
+       Hyperparameter Evolution
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="11_transfer-learning-froze-layers.html">
+       Transfer Learning with Frozen Layers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../yolov5/index.html">
+     YOLOV5
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+    <label for="toctree-checkbox-6">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/01_train-custom-datasets.html">
+       训练自定义数据 📌
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/face-mask.html">
+       口罩识别
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/test.html">
+       测试
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/test-face-mask.html">
+       口罩识别测试
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  帮助
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../other/index.html">
+   参考
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../other/bugs.html">
+     PyTorch 常见 Bug
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../other/object-detection.html">
+     目标检测参考
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../other/other.html">
+     其他
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../glossary/index.html">
+   术语表
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../glossary/numpy.html">
+     NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../glossary/pytorch.html">
+     PyTorch 词汇表
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div class="w3-padding w3-card-4 w3-pale-green">
+  <a href="https://github.com/xinetzone" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub"
+      data-position="top" data-delay="50">
+      <i class="fab fa-github"></i>
+  </a>
+  <a href="mailto:q735613050@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top"
+      data-delay="50">
+      <i class="fas fa-envelope-open"></i>
+  </a>
+  <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=735613050" class="tooltipped"
+      target="_blank" data-tooltip="QQ联系我: 735613050" data-position="top" data-delay="50">
+      <i class="fab fa-qq"></i>
+  </a>
+  <a href="https://www.zhihu.com/people/xinetzone" class="tooltipped" target="_blank"
+      data-tooltip="关注我的知乎: xinetzone" data-position="top" data-delay="50">
+      <i class="fab fa-zhihu1">知</i>
+  </a>
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/xinet" class="tooltipped"
+      data-tooltip="领英联系我: xinet" data-position="top" data-delay="50">
+      <i class="fab fa-linkedin"></i>
+  </a>
+  <div><a href="https://github.com/xinetzone/pytorch-book">PyTorch Book</a> 版权所有</div>
+</div> 
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="切换导航" aria-controls="site-navigation"
+                title="切换导航" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="下载此页面"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/yolo/tutorials/03_supervisely-ecosystem.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="下载源文件" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="列印成PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/xinetzone/pytorch-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="源库"><i
+                    class="fab fa-github"></i>资料库</button></a>
+        <a class="issues-button"
+            href="https://github.com/xinetzone/pytorch-book/issues/new?title=Issue%20on%20page%20%2Fyolo/tutorials/03_supervisely-ecosystem.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="打开一个问题"><i class="fas fa-lightbulb"></i>公开的问题</button></a>
+        <a class="edit-button" href="https://github.com/xinetzone/pytorch-book/edit/main/docs/yolo/tutorials/03_supervisely-ecosystem.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="编辑这个页面"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全屏模式"
+        title="全屏模式"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 内容
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Supervisely Ecosystem 🆕
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-supervisely">
+   🔥 About Supervisely
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#yolo-v5-apps-collection">
+   🎉 YOLO v5 Apps Collection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-developers">
+   For Developers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contact-questions-suggestions">
+   Contact &amp; Questions &amp; Suggestions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Supervisely Ecosystem 🆕</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 内容 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Supervisely Ecosystem 🆕
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-supervisely">
+   🔥 About Supervisely
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#yolo-v5-apps-collection">
+   🎉 YOLO v5 Apps Collection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-developers">
+   For Developers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contact-questions-suggestions">
+   Contact &amp; Questions &amp; Suggestions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="supervisely-ecosystem">
+<h1>Supervisely Ecosystem 🆕<a class="headerlink" href="#supervisely-ecosystem" title="永久链接至标题">¶</a></h1>
+<p>📚 This guide explains how to use <a class="reference external" href="https://supervise.ly/"><strong>Supervisely</strong></a> with YOLOv5 🚀.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="table-of-contents">
+<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="永久链接至标题">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="#-about-supervisely">About Supervisely</a></p></li>
+<li><p><a class="reference external" href="#Prerequisites">Prerequisites</a></p></li>
+<li><p><a class="reference external" href="#-yolo-v5-apps-collection">YOLOv5 Apps Collection</a></p></li>
+<li><p><a class="reference external" href="#For-developers">For developers</a></p></li>
+<li><p><a class="reference external" href="#contact--questions--suggestions">Contact &amp; Questions &amp; Suggestions</a></p></li>
+</ol>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="about-supervisely">
+<h1>🔥 About Supervisely<a class="headerlink" href="#about-supervisely" title="永久链接至标题">¶</a></h1>
+<p>You can think of <a class="reference external" href="https://supervise.ly/">Supervisely</a> as an Operating System available via Web Browser to help you solve Computer Vision tasks. The idea is to unify all the relevant tools that may be needed to make the development process as smooth and fast as possible.</p>
+<p>More concretely, Supervisely includes the following functionality:</p>
+<ul class="simple">
+<li><p>Data labeling for images, videos, 3D point cloud and volumetric medical images (dicom)</p></li>
+<li><p>Data visualization and quality control</p></li>
+<li><p>State-Of-The-Art Deep Learning models for segmentation, detection, classification and other tasks</p></li>
+<li><p>Interactive tools for model performance analysis</p></li>
+<li><p>Specialized Deep Learning models to speed up data labeling (aka AI-assisted labeling)</p></li>
+<li><p>Synthetic data generation tools</p></li>
+<li><p>Instruments to make it easier to collaborate for data scientists, data labelers, domain experts and software engineers</p></li>
+</ul>
+<p>One challenge is to make it possible for everyone to train and apply SOTA Deep Learning models directly from the Web Browser. To address it, we introduce an open sourced Supervisely Agent. All you need to do is to execute a single command on your machine with the GPU that installs the Agent. After that, you keep working in the browser and all the GPU related computations will be performed on the connected machine(s).</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="永久链接至标题">¶</a></h1>
+<p>You should connect computer with GPU to your Supervisely account. If you already have Supervisely Agent running on your computer, you can skip this step.</p>
+<p>Several tools have to be installed on your computer:</p>
+<ul class="simple">
+<li><p>Nvidia drives + <a class="reference external" href="https://developer.nvidia.com/cuda-downloads">CUDA Toolkit</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/engine/install/">Docker</a></p></li>
+<li><p><a class="reference external" href="https://github.com/NVIDIA/nvidia-docker">NVIDIA Container Toolkit</a></p></li>
+</ul>
+<p>Once your computer is ready just add agent to your team and execute automatically generated running command in terminal. Watch how-to video:</p>
+<a data-key="sly-embeded-video-link" href="https://youtu.be/aDqQiYycqyk" data-video-code="aDqQiYycqyk">
+    <img src="https://i.imgur.com/X9NTc5X.png" alt="SLY_EMBEDED_VIDEO_LINK"  style="width:50%;">
+</a>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="yolo-v5-apps-collection">
+<h1>🎉 YOLO v5 Apps Collection<a class="headerlink" href="#yolo-v5-apps-collection" title="永久链接至标题">¶</a></h1>
+<p>YOLOv5 is one of the best available detectors. And we are proud to announce its full integrtion into <a class="reference external" href="https://ecosystem.supervise.ly/">Supervisely Ecosystem</a>. To learn more about how to use every app, please go to app’s readme page (links are provided). Just add the apps to your team to start using them.</p>
+<img alt="https://i.imgur.com/az5sqvk.png" src="https://i.imgur.com/az5sqvk.png" />
+<p>YOLOv5 Collection consists of the following apps:</p>
+<ol>
+<li><p><a class="reference external" href="https://ecosystem.supervise.ly/apps/supervisely-ecosystem%252Fyolov5%252Fsupervisely%252Ftrain">Train YOLOv5</a> - start training on your custom data. Just run app from the context menu of your project, choose classes of interest, train/val splits, configure training metaparameters and augmentations, and monitor training metrics in realtime. App automatically converts all labels to rectangles. All training artifacts including model weights will be saved to Team Files and can be easily downloaded.</p>
+<a class="reference internal image-reference" href="https://i.imgur.com/RkVzrLC.png"><img alt="https://i.imgur.com/RkVzrLC.png" src="https://i.imgur.com/RkVzrLC.png" style="width: 350px;" /></a>
+</li>
+<li><p><a class="reference external" href="https://ecosystem.supervise.ly/apps/supervisely-ecosystem%252Fyolov5%252Fsupervisely%252Fserve">Serve YOLOv5</a> - serve model as Rest API service. You can run pretrained model, use custom model weights trained in Supervisely as well as weights trained outside (just upload weights file to Team Files). Thus other apps from Ecosystem can get predictions from the deployed model. Also developers can send inference requiests in a few lines of python code.</p>
+<a class="reference internal image-reference" href="https://i.imgur.com/DVONwK8.png"><img alt="https://i.imgur.com/DVONwK8.png" src="https://i.imgur.com/DVONwK8.png" style="width: 350px;" /></a>
+</li>
+<li><p><a class="reference external" href="https://ecosystem.supervise.ly/apps/supervisely-ecosystem%252Fnn-image-labeling%252Fproject-dataset">Apply NN to images project </a> - app allows to play with different inference options and visualize predictions in real time.  Once you choose inference settings you can apply model to all images in your project to visually analise predictions and perform automatic data pre-labeling.</p>
+<a class="reference internal image-reference" href="https://i.imgur.com/M2Tp8lE.png"><img alt="https://i.imgur.com/M2Tp8lE.png" src="https://i.imgur.com/M2Tp8lE.png" style="width: 350px;" /></a>
+</li>
+<li><p><a class="reference external" href="https://ecosystem.supervise.ly/apps/supervisely-ecosystem%252Fnn-image-labeling%252Fannotation-tool">NN Image Labeling</a> - integrate any deployd NN to Supervisely Image Labeling UI. Configure inference settings and model output classes. Press <code class="docutils literal notranslate"><span class="pre">Apply</span></code> button (or use hotkey) and detections with their confidences will immediately appear on the image.</p>
+<a class="reference internal image-reference" href="https://i.imgur.com/hYEucNt.png"><img alt="https://i.imgur.com/hYEucNt.png" src="https://i.imgur.com/hYEucNt.png" style="width: 350px;" /></a>
+</li>
+<li><p><a class="reference external" href="https://ecosystem.supervise.ly/apps/convert-supervisely-to-yolov5-format">Convert Supervisely to YOLO v5 format</a> - export labeled images project in yolov5 compatible format.</p>
+<a class="reference internal image-reference" href="https://i.imgur.com/9cfB1m0.png"><img alt="https://i.imgur.com/9cfB1m0.png" src="https://i.imgur.com/9cfB1m0.png" style="width: 350px;" /></a>
+</li>
+<li><p><a class="reference external" href="https://ecosystem.supervise.ly/apps/convert-yolov5-to-supervisely-format">Convert YOLO v5 to Supervisely format</a> - import images and yolov5 annotatons to Supervisely.</p>
+<a class="reference internal image-reference" href="https://i.imgur.com/roiJIE8.png"><img alt="https://i.imgur.com/roiJIE8.png" src="https://i.imgur.com/roiJIE8.png" style="width: 350px;" /></a>
+</li>
+</ol>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="for-developers">
+<h1>For Developers<a class="headerlink" href="#for-developers" title="永久链接至标题">¶</a></h1>
+<ul class="simple">
+<li><p>you can use sources of <a class="reference external" href="https://github.com/supervisely-ecosystem/yolov5/tree/master/supervisely/serve">Serve YOLOv5 app</a> as example of how to prepare weights, initialize model and apply it to a folder with images (or to images URLs)</p></li>
+<li><p>This apps collection is based on the original YOLOv5 <a class="reference external" href="https://github.com/ultralytics/yolov5/releases/tag/v5.0">release v5.0</a>. Once a next official release is available, all apps will be synchronized with it and also released with the new versions. Before running any app you can choose what version to use. Also Supervisely Team will pull updates from original master branch from time to time.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="contact-questions-suggestions">
+<h1>Contact &amp; Questions &amp; Suggestions<a class="headerlink" href="#contact-questions-suggestions" title="永久链接至标题">¶</a></h1>
+<ul class="simple">
+<li><p>for technical support please leave issues, questions or suggestions to original <a class="reference external" href="https://github.com/ultralytics/yolov5/issues">YOLOv5 repo</a> with the prefix <code class="docutils literal notranslate"><span class="pre">[Supervisely]</span></code>. Our team will try to help.</p></li>
+<li><p>also we can chat in slack channel <a class="reference external" href="https://supervise.ly/slack"><img alt="" src="https://img.shields.io/badge/slack-chat-green.svg?logo=slack" /></a></p></li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "xinetzone/pytorch-book",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./yolo/tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="02_weights-and-biasis-logging.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title">Weights &amp; Biases Logging 🆕</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_multi-gpu-training.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">Multi-GPU Training</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      通过 xinetzone<br/>
+    
+        &copy; 版权 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

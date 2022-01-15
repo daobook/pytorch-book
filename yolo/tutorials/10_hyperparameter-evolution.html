@@ -1,0 +1,793 @@
+
+<!DOCTYPE html>
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyperparameter Evolution</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "xinetzone/pytorch-book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://xinetzone.github.io/pytorch-book/yolo/tutorials/10_hyperparameter-evolution.html" />
+    <link rel="shortcut icon" href="../../_static/page-logo.jfif"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Transfer Learning with Frozen Layers" href="11_transfer-learning-froze-layers.html" />
+    <link rel="prev" title="Model Pruning/Sparsity" href="09_pruning-sparsity.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索这本书..." aria-label="搜索这本书..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../start/index.html">
+   PyTorch 基础
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/00_quickly-study.html">
+     快速入门
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/01_tensor.html">
+     张量
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/02_data.html">
+     Dataset 和 Dataloader
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/03_transforms.html">
+     变换
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/04_build-model.html">
+     构建神经网络
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../start/05_autograd.html">
+     自动微分
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  计算机视觉
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../object-detection/index.html">
+   目标检测
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../object-detection/fine-tuning.html">
+     微调
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../index.html">
+   YOLO 系列
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro.html">
+     简介
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../quick-start.html">
+     快速入门
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../use.html">
+     简单使用
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../environments/index.html">
+     环境
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../environments/AWS-Quickstart.html">
+       Amazon Web Services
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../environments/Docker-Quickstart.html">
+       Docker
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../environments/GCP-Quickstart.html">
+       Google Cloud Platform
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="index.html">
+     教程
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="00_train-custom-datasets.html">
+       训练自定义数据
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="01_training-tips-best-results.html">
+       Tips for Best Training Results
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="02_weights-and-biasis-logging.html">
+       Weights &amp; Biases Logging 🆕
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="03_supervisely-ecosystem.html">
+       Supervisely Ecosystem 🆕
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="04_multi-gpu-training.html">
+       Multi-GPU Training
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="05_pytorch-hub.html">
+       PyTorch Hub
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="06_torchscript-onnx-coreml-export.html">
+       TorchScript, ONNX, CoreML Export
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="07_test-time-augmentation.html">
+       Test-Time Augmentation (TTA)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="08_model-ensembling.html">
+       Model Ensembling
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="09_pruning-sparsity.html">
+       Model Pruning/Sparsity
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Hyperparameter Evolution
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="11_transfer-learning-froze-layers.html">
+       Transfer Learning with Frozen Layers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../yolov5/index.html">
+     YOLOV5
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+    <label for="toctree-checkbox-6">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/01_train-custom-datasets.html">
+       训练自定义数据 📌
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/face-mask.html">
+       口罩识别
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/test.html">
+       测试
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../yolov5/test-face-mask.html">
+       口罩识别测试
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  帮助
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../other/index.html">
+   参考
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../other/bugs.html">
+     PyTorch 常见 Bug
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../other/object-detection.html">
+     目标检测参考
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../other/other.html">
+     其他
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../glossary/index.html">
+   术语表
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../glossary/numpy.html">
+     NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../glossary/pytorch.html">
+     PyTorch 词汇表
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div class="w3-padding w3-card-4 w3-pale-green">
+  <a href="https://github.com/xinetzone" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub"
+      data-position="top" data-delay="50">
+      <i class="fab fa-github"></i>
+  </a>
+  <a href="mailto:q735613050@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top"
+      data-delay="50">
+      <i class="fas fa-envelope-open"></i>
+  </a>
+  <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=735613050" class="tooltipped"
+      target="_blank" data-tooltip="QQ联系我: 735613050" data-position="top" data-delay="50">
+      <i class="fab fa-qq"></i>
+  </a>
+  <a href="https://www.zhihu.com/people/xinetzone" class="tooltipped" target="_blank"
+      data-tooltip="关注我的知乎: xinetzone" data-position="top" data-delay="50">
+      <i class="fab fa-zhihu1">知</i>
+  </a>
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/xinet" class="tooltipped"
+      data-tooltip="领英联系我: xinet" data-position="top" data-delay="50">
+      <i class="fab fa-linkedin"></i>
+  </a>
+  <div><a href="https://github.com/xinetzone/pytorch-book">PyTorch Book</a> 版权所有</div>
+</div> 
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="切换导航" aria-controls="site-navigation"
+                title="切换导航" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="下载此页面"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/yolo/tutorials/10_hyperparameter-evolution.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="下载源文件" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="列印成PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/xinetzone/pytorch-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="源库"><i
+                    class="fab fa-github"></i>资料库</button></a>
+        <a class="issues-button"
+            href="https://github.com/xinetzone/pytorch-book/issues/new?title=Issue%20on%20page%20%2Fyolo/tutorials/10_hyperparameter-evolution.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="打开一个问题"><i class="fas fa-lightbulb"></i>公开的问题</button></a>
+        <a class="edit-button" href="https://github.com/xinetzone/pytorch-book/edit/main/docs/yolo/tutorials/10_hyperparameter-evolution.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="编辑这个页面"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全屏模式"
+        title="全屏模式"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 内容
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#before-you-start">
+   Before You Start
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialize-hyperparameters">
+   1. Initialize Hyperparameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-fitness">
+   2. Define Fitness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evolve">
+   3. Evolve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize">
+   4. Visualize
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environments">
+   Environments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#status">
+   Status
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Hyperparameter Evolution</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 内容 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#before-you-start">
+   Before You Start
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialize-hyperparameters">
+   1. Initialize Hyperparameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-fitness">
+   2. Define Fitness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evolve">
+   3. Evolve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize">
+   4. Visualize
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environments">
+   Environments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#status">
+   Status
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="hyperparameter-evolution">
+<h1>Hyperparameter Evolution<a class="headerlink" href="#hyperparameter-evolution" title="永久链接至标题">¶</a></h1>
+<p>📚  This guide explains <strong>hyperparameter evolution</strong> for YOLOv5 🚀. Hyperparameter evolution is a method of <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">Hyperparameter Optimization</a> using a <a class="reference external" href="https://en.wikipedia.org/wiki/Genetic_algorithm">Genetic Algorithm</a> (GA) for optimization.</p>
+<p>Hyperparameters in ML control various aspects of training, and finding optimal values for them can be a challenge. Traditional methods like grid searches can quickly become intractable due to 1) the high dimensional search space 2) unknown correlations among the dimensions, and 3) expensive nature of evaluating the fitness at each point, making GA a suitable candidate for hyperparameter searches.</p>
+<div class="section" id="before-you-start">
+<h2>Before You Start<a class="headerlink" href="#before-you-start" title="永久链接至标题">¶</a></h2>
+<p>Clone this repo and install <a class="reference external" href="https://github.com/ultralytics/yolov5/blob/master/requirements.txt">requirements.txt</a> dependencies, including <strong>Python&gt;=3.8</strong> and <strong>PyTorch&gt;=1.7</strong>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/ultralytics/yolov5  <span class="c1"># clone repo</span>
+$ <span class="nb">cd</span> yolov5
+$ pip install -r requirements.txt  <span class="c1"># install dependencies</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialize-hyperparameters">
+<h2>1. Initialize Hyperparameters<a class="headerlink" href="#initialize-hyperparameters" title="永久链接至标题">¶</a></h2>
+<p>YOLOv5 has about 25 hyperparameters used for various training settings. These are defined in yaml files in the /data directory. Better initial guesses will produce better final results, so it is important to initialize these values properly before evolving. If in doubt, simply use the default values, which are optimized for YOLOv5 COCO training from scratch.
+<a class="reference external" href="https://github.com/ultralytics/yolov5/blob/3bb414890a253bb1a269fb81cc275d11c8fffa72/data/hyp.scratch.yaml#L1-L33">https://github.com/ultralytics/yolov5/blob/3bb414890a253bb1a269fb81cc275d11c8fffa72/data/hyp.scratch.yaml#L1-L33</a></p>
+</div>
+<div class="section" id="define-fitness">
+<h2>2. Define Fitness<a class="headerlink" href="#define-fitness" title="永久链接至标题">¶</a></h2>
+<p>Fitness is the value we seek to maximize. In YOLOv5 we have defined a default fitness function as a weighted combination of metrics: mAP&#64;0.5 contributes 10% of the weight and mAP&#64;0.5:0.95 contributes the remaining 90%. You may adjust these as you see fit or use the default fitness definition.
+<a class="reference external" href="https://github.com/ultralytics/yolov5/blob/c5d233189729a9e7e25d3aa2d347aed02b545d30/utils/general.py#L917-L921">https://github.com/ultralytics/yolov5/blob/c5d233189729a9e7e25d3aa2d347aed02b545d30/utils/general.py#L917-L921</a></p>
+</div>
+<div class="section" id="evolve">
+<h2>3. Evolve<a class="headerlink" href="#evolve" title="永久链接至标题">¶</a></h2>
+<p>Evolution is performed about a base scenario which we seek to improve upon. The base scenario in this example is finetuning COCO128 for 10 epochs using pretrained YOLOv5s. The base scenario training command is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python train.py --epochs <span class="m">10</span> --data coco128.yaml --weights yolov5s.pt --cache
+</pre></div>
+</div>
+<p>To evolve hyperparameters <strong>specific to this scenario</strong>, starting from our initial values defined in <strong>Section 1.</strong>, and maximizing the fitness defined in <strong>Section 2.</strong>, append <code class="docutils literal notranslate"><span class="pre">--evolve</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single-GPU</span>
+python train.py --epochs <span class="m">10</span> --data coco128.yaml --weights yolov5s.pt --cache --evolve
+
+<span class="c1"># Multi-GPU</span>
+<span class="k">for</span> i <span class="k">in</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span><span class="p">;</span> <span class="k">do</span>
+  nohup python train.py --epochs <span class="m">10</span> --data coco128.yaml --weights yolov5s.pt --cache --evolve --device <span class="nv">$i</span> &gt; evolve_gpu_<span class="nv">$i</span>.log <span class="p">&amp;</span>
+<span class="k">done</span>
+
+<span class="c1"># Multi-GPU bash while (not recommended)</span>
+<span class="k">for</span> i <span class="k">in</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span><span class="p">;</span> <span class="k">do</span>
+  nohup <span class="s2">&quot;</span><span class="k">$(while</span> true<span class="p">;</span> <span class="k">do</span> python train.py ... --evolve --device <span class="nv">$i</span><span class="p">;</span> <span class="k">done)</span><span class="s2">&quot;</span> &gt; evolve_gpu_<span class="nv">$i</span>.log <span class="p">&amp;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>The default evolution settings will run the base scenario 300 times, i.e. for 300 generations:
+<a class="reference external" href="https://github.com/ultralytics/yolov5/blob/c5d233189729a9e7e25d3aa2d347aed02b545d30/train.py#L497">https://github.com/ultralytics/yolov5/blob/c5d233189729a9e7e25d3aa2d347aed02b545d30/train.py#L497</a></p>
+<p>The main genetic operators are <strong>crossover</strong> and <strong>mutation</strong>. In this work mutation is used, with a 90% probability and a 0.04 variance to create new offspring based on a combination of the best parents from all previous generations. Results are tracked in <code class="docutils literal notranslate"><span class="pre">yolov5/evolve.txt</span></code>, and the highest fitness offspring is saved every generation as <code class="docutils literal notranslate"><span class="pre">yolov5/runs/evolve/hyp_evolved.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyperparameter Evolution Results</span>
+<span class="c1"># Generations: 1000</span>
+<span class="c1">#                   P         R     mAP.5 mAP.5:.95       box       obj       cls</span>
+<span class="c1"># Metrics:     0.4761      0.79     0.763    0.4951   0.01926   0.03286  0.003559</span>
+
+<span class="nt">lr0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.01</span>  <span class="c1"># initial learning rate (SGD=1E-2, Adam=1E-3)</span>
+<span class="nt">lrf</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2</span>  <span class="c1"># final OneCycleLR learning rate (lr0 * lrf)</span>
+<span class="nt">momentum</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.937</span>  <span class="c1"># SGD momentum/Adam beta1</span>
+<span class="nt">weight_decay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0005</span>  <span class="c1"># optimizer weight decay 5e-4</span>
+<span class="nt">warmup_epochs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.0</span>  <span class="c1"># warmup epochs (fractions ok)</span>
+<span class="nt">warmup_momentum</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.8</span>  <span class="c1"># warmup initial momentum</span>
+<span class="nt">warmup_bias_lr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>  <span class="c1"># warmup initial bias lr</span>
+<span class="nt">box</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.05</span>  <span class="c1"># box loss gain</span>
+<span class="nt">cls</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>  <span class="c1"># cls loss gain</span>
+<span class="nt">cls_pw</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>  <span class="c1"># cls BCELoss positive_weight</span>
+<span class="nt">obj</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>  <span class="c1"># obj loss gain (scale with pixels)</span>
+<span class="nt">obj_pw</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>  <span class="c1"># obj BCELoss positive_weight</span>
+<span class="nt">iou_t</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.20</span>  <span class="c1"># IoU training threshold</span>
+<span class="nt">anchor_t</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4.0</span>  <span class="c1"># anchor-multiple threshold</span>
+<span class="nt">anchors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>  <span class="c1"># anchors per output grid (0 to ignore)</span>
+<span class="nt">fl_gamma</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>  <span class="c1"># focal loss gamma (efficientDet default gamma=1.5)</span>
+<span class="nt">hsv_h</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.015</span>  <span class="c1"># image HSV-Hue augmentation (fraction)</span>
+<span class="nt">hsv_s</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.7</span>  <span class="c1"># image HSV-Saturation augmentation (fraction)</span>
+<span class="nt">hsv_v</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.4</span>  <span class="c1"># image HSV-Value augmentation (fraction)</span>
+<span class="nt">degrees</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>  <span class="c1"># image rotation (+/- deg)</span>
+<span class="nt">translate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>  <span class="c1"># image translation (+/- fraction)</span>
+<span class="nt">scale</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>  <span class="c1"># image scale (+/- gain)</span>
+<span class="nt">shear</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>  <span class="c1"># image shear (+/- deg)</span>
+<span class="nt">perspective</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>  <span class="c1"># image perspective (+/- fraction), range 0-0.001</span>
+<span class="nt">flipud</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>  <span class="c1"># image flip up-down (probability)</span>
+<span class="nt">fliplr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>  <span class="c1"># image flip left-right (probability)</span>
+<span class="nt">mosaic</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>  <span class="c1"># image mosaic (probability)</span>
+<span class="nt">mixup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>  <span class="c1"># image mixup (probability)</span>
+</pre></div>
+</div>
+<p>We recommend a <strong>minimum</strong> of 300 generations of evolution for best results. Note that <strong>evolution is generally expensive and time consuming</strong>, as the base scenario is trained hundreds of times, possibly requiring hundreds or thousands of GPU hours.</p>
+</div>
+<div class="section" id="visualize">
+<h2>4. Visualize<a class="headerlink" href="#visualize" title="永久链接至标题">¶</a></h2>
+<p>Results are saved as <code class="docutils literal notranslate"><span class="pre">yolov5/evolve.png</span></code>, with one plot per hyperparameter. Values are on the x axis and fitness on the y axis. Yellow indicates higher concentrations. Vertical lines indicate that a parameter has been disabled and does not mutate. This is user selectable in the <code class="docutils literal notranslate"><span class="pre">meta</span></code> dictionary in <a class="reference external" href="http://train.py">train.py</a>, and is useful for fixing parameters and preventing them from evolving.</p>
+<p><img alt="evolve" src="https://user-images.githubusercontent.com/26833433/89130469-f43e8e00-d4b9-11ea-9e28-f8ae3622516d.png" /></p>
+</div>
+<div class="section" id="environments">
+<h2>Environments<a class="headerlink" href="#environments" title="永久链接至标题">¶</a></h2>
+<p>YOLOv5 may be run in any of the following up-to-date verified environments (with all dependencies including <a class="reference external" href="https://developer.nvidia.com/cuda">CUDA</a>/<a class="reference external" href="https://developer.nvidia.com/cudnn">CUDNN</a>, <a class="reference external" href="https://www.python.org/">Python</a> and <a class="reference external" href="https://pytorch.org/">PyTorch</a> preinstalled):</p>
+<ul class="simple">
+<li><p><strong>Google Colab and Kaggle</strong> notebooks with free GPU: <a href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> <a href="https://www.kaggle.com/ultralytics/yolov5"><img alt="Open In Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></li>
+<li><p><strong>Google Cloud</strong> Deep Learning VM. See <a class="reference external" href="https://github.com/ultralytics/yolov5/wiki/GCP-Quickstart">GCP Quickstart Guide</a></p></li>
+<li><p><strong>Amazon</strong> Deep Learning AMI. See <a class="reference external" href="https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart">AWS Quickstart Guide</a></p></li>
+<li><p><strong>Docker Image</strong>. See <a class="reference external" href="https://github.com/ultralytics/yolov5/wiki/Docker-Quickstart">Docker Quickstart Guide</a> <a href="https://hub.docker.com/r/ultralytics/yolov5"><img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/ultralytics/yolov5?logo=docker" /></a></p></li>
+</ul>
+</div>
+<div class="section" id="status">
+<h2>Status<a class="headerlink" href="#status" title="永久链接至标题">¶</a></h2>
+<p><img alt="CI CPU testing" src="https://github.com/ultralytics/yolov5/workflows/CI%20CPU%20testing/badge.svg" /></p>
+<p>If this badge is green, all <a class="reference external" href="https://github.com/ultralytics/yolov5/actions">YOLOv5 GitHub Actions</a> Continuous Integration (CI) tests are currently passing. CI tests verify correct operation of YOLOv5 training (<a class="reference external" href="https://github.com/ultralytics/yolov5/blob/master/train.py">train.py</a>), testing (<a class="reference external" href="https://github.com/ultralytics/yolov5/blob/master/test.py">test.py</a>), inference (<a class="reference external" href="https://github.com/ultralytics/yolov5/blob/master/detect.py">detect.py</a>) and export (<a class="reference external" href="https://github.com/ultralytics/yolov5/blob/master/models/export.py">export.py</a>) on MacOS, Windows, and Ubuntu every 24 hours and on every commit.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "xinetzone/pytorch-book",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./yolo/tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="09_pruning-sparsity.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title">Model Pruning/Sparsity</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="11_transfer-learning-froze-layers.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">Transfer Learning with Frozen Layers</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      通过 xinetzone<br/>
+    
+        &copy; 版权 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
