@@ -120,7 +120,15 @@ latex:
 # Advanced and power-user settings
 sphinx:
   local_extensions: # A list of local extensions to load by sphinx specified by "name: path" items
-  config: 
+  config:
+    locale_dirs: ['../locales/']
+    gettext_location: false
+    nb_render_priority:
+      gettext: {}
+    nb_custom_formats:
+      .Rmd:
+        - jupytext.reads
+        - fmt: Rmd
     html_js_files:
       - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
     language: zh # https://www.w3schools.com/tags/ref_language_codes.asp
@@ -131,36 +139,7 @@ sphinx:
       mathematics:
         - "https://xinetzone.github.io/mathematics/"
         - null
-      # mini-book:
-      #   - "https://xinetzone.github.io/mini-book/"
-      #   - null
-      # plotly-book:
-      #   - "https://xinetzone.github.io/plotly-book/"
-      #   - null
-      # sympy-book:
-      #   - "https://xinetzone.github.io/sympy-book/"
-      #   - null
-      # jupyter-book:
-      #   - "https://xinetzone.github.io/jupyter-book/"
-      #   - null
-      # pytorch-book:
-      #   - "https://xinetzone.github.io/pytorch-book/"
-      #   - null
-      # tensorflow-book:
-      #   - "https://xinetzone.github.io/tensorflow-book/"
-      #   - null
-      # life:
-      #   - "https://xinetzone.github.io/life/"
-      #   - null
-      # ai-world:
-      #   - "https://xinetzone.github.io/ai-world/"
-      #   - null
-      # linear-algebra:
-      #   - "https://xinetzone.github.io/linear-algebra/"
-      #   - null
-      # matrix-theory:
-      #   - "https://xinetzone.github.io/matrix-theory/"
-      #   - null
+      
   extra_extensions:
     - sphinx_click.ext
     - sphinx_inline_tabs
