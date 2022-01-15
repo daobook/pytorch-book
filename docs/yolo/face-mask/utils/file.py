@@ -1,4 +1,5 @@
 import re
+# from abc import ABC
 from pathlib import Path
 import xml.etree.ElementTree as ET
 import shutil
@@ -6,17 +7,23 @@ import yaml
 from sklearn.model_selection import train_test_split
 
 
-def mkdir(out_dir):
+def mkdir(out_dir, overwrite=False):
     out_dir = Path(out_dir)
     if not out_dir.exists():
         out_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        if overwrite:
+            shutil.rmtree(out_dir)
 
 
-def glob_file(root, mode):
-    files = [file.as_posix() for file in root.rglob(mode)]
-    # 排序
-    files.sort(key=lambda e: int(re.sub('[^0-9]', '', e)))
-    return files
+def change_name(path, new_dir, suffix='.txt'):
+    '''修改 path 的 name 的后缀，并将其父目录变为 new_dir
+    '''
+    path = Path(path)
+    new_dir = Path(new_dir)
+    name = path.name
+    name = new_dir/name.replace(path.suffix, suffix)
+    return name.as_posix()
 
 
 def get_yolo_format(pic_width, pic_height, x_min, y_min, x_max, y_max):
@@ -27,85 +34,113 @@ def get_yolo_format(pic_width, pic_height, x_min, y_min, x_max, y_max):
     return x_center, y_center, width, height
 
 
-def make_label(annotations_files, new_labels_path, labels):
-    '''将 xml 文件转换为 txt 文件，因为 yolo 希望 txt 文件具有规范化的边界盒。'''
+def labels_iter(file_object, names):
+    tree = ET.parse(file_object)
+    pic_width = int(tree.find('size').findtext('width'))
+    pic_height = int(tree.find('size').findtext('height'))
+    info = [pic_width, pic_height]
 
-    infos = []
-    for annotations_file in annotations_files:
-        annotations_file = Path(annotations_file)
-        label_file_name = annotations_file.name.split('.')[0] + '.txt'
-        with open(new_labels_path/label_file_name, 'w') as label_file:
-            root = ET.parse(annotations_file)
-            pic_width = int(root.find('size').findtext('width'))
-            pic_height = int(root.find('size').findtext('height'))
-            info = [pic_width, pic_height]
-            for obj in root.findall('object'):
-                #box_info = []
-                class_name = obj.findtext('name')
-                x_min = int(obj.find('bndbox').findtext('xmin'))
-                y_min = int(obj.find('bndbox').findtext('ymin'))
-                x_max = int(obj.find('bndbox').findtext('xmax'))
-                y_max = int(obj.find('bndbox').findtext('ymax'))
-                info.append([labels.index(class_name),
-                            x_min, y_min, x_max, y_max])
-                yolo_format = get_yolo_format(
-                    pic_width, pic_height, x_min, y_min, x_max, y_max)
-                label_file.write(str(labels.index(class_name)) +
-                                 ' ' + ' '.join(map(str, yolo_format)) + '\n')
-            infos.append(info)
-            label_file.flush()
+    for obj in tree.findall('object'):
+        class_name = obj.findtext('name')
+        x_min = int(obj.find('bndbox').findtext('xmin'))
+        y_min = int(obj.find('bndbox').findtext('ymin'))
+        x_max = int(obj.find('bndbox').findtext('xmax'))
+        y_max = int(obj.find('bndbox').findtext('ymax'))
+        info.append([names.index(class_name),
+                    x_min, y_min, x_max, y_max])
+        yolo_format = get_yolo_format(pic_width, pic_height,
+                                      x_min, y_min, x_max, y_max)
+        yield [names.index(class_name), *yolo_format]
 
 
-def copy_file(paths, new_dir):
-    for path in paths:
-        path = Path(path)
+class PathMeta:
+    def __init__(self, root):
+        self.root = Path(root)
+
+    def glob(self, mode):
+        # 获取全部路径
+        paths = [file.as_posix() for file in self.root.rglob(mode)]
+        # 排序
+        paths.sort(key=lambda e: int(re.sub('[^0-9]', '', e)))
+        return paths
+
+    def copy_file(self, path, new_path):
+        '''复制 path 到 new_path
+        '''
+        shutil.copy(path, new_path)
+
+    def copy_files(self, path_group, new_dir, overwrite=False):
+        '''复制 path_group 中的文件到 new_dir 下
+        :param: paths 是可迭代的路径组对象
+        :param: new_dir 是目标目录
+        '''
         new_dir = Path(new_dir)
-        shutil.copy(path, new_dir/path.name)
+        mkdir(new_dir, overwrite=overwrite)
+        for path in path_group:
+            path = Path(path)
+            self.copy_file(path, new_dir/path.name)
 
 
-def split(images_files, labels_files, show_count=5):
-    '''划分数据集'''
-    images_train, images_else, labels_train, labels_else = \
-        train_test_split(images_files, labels_files, test_size=0.2)
-    images_val, images_test, labels_val, labels_test = \
-        train_test_split(images_else, labels_else,
-                         test_size=show_count / len(images_else))
-    return (images_train, labels_train), (images_val, labels_val), (images_test, labels_test)
+class ObjectPath(PathMeta):
+    def __init__(self, root,
+                 names,
+                 mode_label='*.xml',
+                 mode_image='*.png'):
+        super().__init__(root)
+        self.names = names
+        self.mode_label = mode_label
+        self.mode_image = mode_image
 
-def write(save_path):
-    with open(save_path, 'w') as fp:
-        fp.writelines()
-        
-def make_yaml(root, labels, yaml_path):
-    yaml_data = {
-        'path': root,
-        'train': 'train',
-        'val': 'val',
-        'nc': len(labels),
-        'names': labels
-    }
+    @property
+    def annotations(self):
+        '''获取标签路径'''
+        return self.glob(self.mode_label)
 
-    with open(yaml_path, 'w') as f:
-        yaml.dump(yaml_data, f, explicit_start=True,
-                  default_flow_style=False)
+    @property
+    def images(self):
+        '''获取图片路径'''
+        return self.glob(self.mode_image)
 
+    def split(self, show_count=5, val_size=0.2):
+        '''划分数据集'''
+        assert show_count > 0, "保证至少有一张作为测试"
+        self.images_train, images_else, self.labels_train, labels_else = \
+            train_test_split(self.images, self.annotations, test_size=val_size)
+        self.images_val, self.images_test, self.labels_val, self.labels_test = \
+            train_test_split(images_else, labels_else,
+                             test_size=show_count / len(images_else))
 
-def gen_dataset(labels, images_files, annotations_files, dataset_path):
-    new_images_path = dataset_path / 'images/'
-    new_labels_path = dataset_path / 'labels/'
-    mkdir(new_images_path)
-    mkdir(new_labels_path)
-    make_label(annotations_files, new_labels_path, labels)
-    # 标签制作
-    labels_files = glob_file(dataset_path, '*.txt')
-    copy_file(images_files, new_images_path)
-    new_images = glob_file(new_images_path, '*.png')
-    (images_train, labels_train), (images_val, labels_val), (images_test, labels_test) = \
-        split(new_images, labels_files)
-    sub_directories = [(images_train, 'train/'),
-                       (images_val, 'val/'), (images_test, 'test/')]
-    # 复制图片
-    for paths, sub_directory in sub_directories:
-        new_dir = new_images_path/sub_directory
-        mkdir(new_dir)
-        copy_file(paths, new_dir)
+    def copy_images(self, new_dir):
+        new_dir = Path(new_dir)
+        mkdir(new_dir, overwrite=True)
+        self.copy_files(self.images_train, new_dir/'train')
+        self.copy_files(self.images_val, new_dir/'val')
+        self.copy_files(self.images_test, new_dir/'test')
+
+    def copy_labels(self, new_dir):
+        new_dir = Path(new_dir)
+        mkdir(new_dir, overwrite=True)
+        self.copy_files(self.labels_train, new_dir/'train')
+        self.copy_files(self.labels_val, new_dir/'val')
+        self.copy_files(self.labels_test, new_dir/'test')
+
+    def write_label(self, label_path, new_dir):
+        with open(label_path) as fp:
+            labels = [' '.join(map(str, label))
+                      for label in labels_iter(fp, self.names)]
+        labels = '\n'.join(labels)
+        label_path = change_name(label_path, new_dir)
+        with open(label_path, 'w') as fp:
+            fp.write(labels)
+
+    def _write_labels(self, label_paths, new_dir):
+        new_dir = Path(new_dir)
+        mkdir(new_dir, overwrite=True)
+        for label_path in label_paths:
+            self.write_label(label_path, new_dir)
+
+    def write_labels(self, new_dir):
+        new_dir = Path(new_dir)
+        self._write_labels(self.labels_train, new_dir/'train')
+        self._write_labels(self.labels_val, new_dir/'val')
+        self._write_labels(self.labels_test, new_dir/'test')
