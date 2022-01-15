@@ -16,6 +16,15 @@ parts:
     - glob: object-detection/**
   - file: yolo/index
     sections:
+    - file: yolo/intro
+    - file: yolo/quick-start
+    - file: yolo/use
+    - file: yolo/environments/index
+      sections:
+      - glob: yolo/environments/**
+    - file: yolo/tutorials/index
+      sections:
+      - glob: yolo/tutorials/**
     - file: yolo/yolov5/index
       sections:
       - glob: yolo/yolov5/**

@@ -13,7 +13,7 @@ copyright: "2021" # 版权年份将放置在页脚中
 logo: logo.jpg # 图书徽标的路径
 
 # 制作书籍时跳过的模式。可以是 glob-style (例如 "*skip.ipynb")
-exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", "atom/**", "**.pt"]
+exclude_patterns: [_build, Thumbs.db, .DS_Store, "yolo/yolov5/models","**.ipynb_checkpoints", "atom/**", "**.pt"]
 # 自动排除目录中的文件
 only_build_toc_files: false
 
@@ -22,9 +22,10 @@ only_build_toc_files: false
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: cache # 是否在构建时执行笔记本。必须是 ("auto", "force", "cache", "off") 之一
+  execute_notebooks: off # 是否在构建时执行笔记本。必须是 ("auto", "force", "cache", "off") 之一
   cache: "" # jupyter 的缓存路径，该路径将用于存储执行工件。 `_build/.jupyter_cache/`
-  exclude_patterns: ["**/atom/*", "*.ipynb"] # 在执行中要“跳过”的模式列表（例如，需要很长时间的笔记本）
+  # 在执行中要“跳过”的模式列表（例如，需要很长时间的笔记本）
+  exclude_patterns: ["**/atom/*", "*.ipynb"] 
   timeout: -1 # 每个笔记本单元允许运行的最长时间（以秒为单位）。
   # 如果为 `true`，则将创建一个临时目录并将其用作命令工作目录（cwd），否则，笔记本的父目录将是 cwd。
   run_in_temp: false
@@ -53,8 +54,8 @@ html:
           target="_blank" data-tooltip="QQ联系我: 735613050" data-position="top" data-delay="50">
           <i class="fab fa-qq"></i>
       </a>
-      <a href="https://www.zhihu.com/people/liu-xin-wei-55" class="tooltipped" target="_blank"
-          data-tooltip="关注我的知乎: liu-xin-wei-55" data-position="top" data-delay="50">
+      <a href="https://www.zhihu.com/people/xinetzone" class="tooltipped" target="_blank"
+          data-tooltip="关注我的知乎: xinetzone" data-position="top" data-delay="50">
           <i class="fab fa-zhihu1">知</i>
       </a>
       <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/xinet" class="tooltipped"
