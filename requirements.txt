@@ -1,0 +1,15 @@
+# numpy
+# pandas
+# matplotlib
+# ipywidgets
+jupyter-book
+# jupyter-cache[cli]
+# ghp-import
+sphinx-inline-tabs
+sphinx-click
+# sphinxext-rediraffe
+# sympy
+# plotly
+# jupyter-dash
+# opencv-python
+tqdm

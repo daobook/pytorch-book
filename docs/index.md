@@ -12,6 +12,3 @@
 ```{tableofcontents}
 ```
 ````
-
-```{nb-exec-table}
-```

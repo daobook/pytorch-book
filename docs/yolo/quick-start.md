@@ -1,7 +1,5 @@
 # 快速入门
 
-## 准备工作
-
 从安装了 `PyTorch>=1.7` 的 `Python>=3.8` 环境开始（本教程使用的是 Python3.9+，PyTorch 1.10+）。安装 YOLOv5 依赖项：
 
 ```shell
@@ -52,24 +50,3 @@ $ python detect.py --source OPTION
 
 * **图片：** bmp, jpg, jpeg, png, tif, tiff, dng, webp, mpo
 * **视频** mov, avi, mp4, mpg, mpeg, m4v, wmv, mkv
-
-### 来自 PyTorch Hub
-
-Inference 可以直接从 PyTorch Hub 中运行，无需克隆软件库。必要的文件将被下载到您的临时目录中。
-
-下面是一个使用 [最新的 YOLOv5s 模型](https://github.com/ultralytics/yolov5/releases) 和资源库示例图像的例子脚本。
- 
-```python
-import torch
-
-# Model
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
-
-# Images
-dir = 'https://github.com/ultralytics/yolov5/raw/master/data/images/'
-imgs = [dir + f for f in ('zidane.jpg', 'bus.jpg')]  # batch of images
-
-# Inference
-results = model(imgs)
-results.print()  # or .show(), .save()
-```
