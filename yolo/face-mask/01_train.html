@@ -875,6 +875,243 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 <img alt="../../_images/01_train_12_0.jpg" src="../../_images/01_train_12_0.jpg" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/val_batch1_labels.jpg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01_train_13_0.jpg" src="../../_images/01_train_13_0.jpg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/results.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="mi">10</span><span class="p">:]</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>epoch</th>
+      <td>10.000000</td>
+      <td>11.000000</td>
+      <td>12.000000</td>
+      <td>13.000000</td>
+      <td>14.000000</td>
+      <td>15.000000</td>
+      <td>16.000000</td>
+      <td>17.000000</td>
+      <td>18.000000</td>
+      <td>19.000000</td>
+    </tr>
+    <tr>
+      <th>train/box_loss</th>
+      <td>0.045140</td>
+      <td>0.044650</td>
+      <td>0.046440</td>
+      <td>0.040833</td>
+      <td>0.039020</td>
+      <td>0.035988</td>
+      <td>0.035030</td>
+      <td>0.033769</td>
+      <td>0.030479</td>
+      <td>0.029943</td>
+    </tr>
+    <tr>
+      <th>train/obj_loss</th>
+      <td>0.033293</td>
+      <td>0.032961</td>
+      <td>0.032191</td>
+      <td>0.028620</td>
+      <td>0.028346</td>
+      <td>0.029660</td>
+      <td>0.032089</td>
+      <td>0.030202</td>
+      <td>0.027858</td>
+      <td>0.028971</td>
+    </tr>
+    <tr>
+      <th>train/cls_loss</th>
+      <td>0.008960</td>
+      <td>0.009033</td>
+      <td>0.008192</td>
+      <td>0.007300</td>
+      <td>0.007547</td>
+      <td>0.007395</td>
+      <td>0.007040</td>
+      <td>0.006997</td>
+      <td>0.006852</td>
+      <td>0.006748</td>
+    </tr>
+    <tr>
+      <th>metrics/precision</th>
+      <td>0.892330</td>
+      <td>0.731410</td>
+      <td>0.861610</td>
+      <td>0.911890</td>
+      <td>0.915650</td>
+      <td>0.935210</td>
+      <td>0.910550</td>
+      <td>0.923760</td>
+      <td>0.940790</td>
+      <td>0.914840</td>
+    </tr>
+    <tr>
+      <th>metrics/recall</th>
+      <td>0.537110</td>
+      <td>0.531800</td>
+      <td>0.481530</td>
+      <td>0.539850</td>
+      <td>0.544140</td>
+      <td>0.537600</td>
+      <td>0.577650</td>
+      <td>0.585510</td>
+      <td>0.557200</td>
+      <td>0.585310</td>
+    </tr>
+    <tr>
+      <th>metrics/mAP_0.5</th>
+      <td>0.591340</td>
+      <td>0.498280</td>
+      <td>0.552830</td>
+      <td>0.607240</td>
+      <td>0.607710</td>
+      <td>0.613930</td>
+      <td>0.627760</td>
+      <td>0.636130</td>
+      <td>0.637950</td>
+      <td>0.660750</td>
+    </tr>
+    <tr>
+      <th>metrics/mAP_0.5:0.95</th>
+      <td>0.289060</td>
+      <td>0.226580</td>
+      <td>0.305110</td>
+      <td>0.329730</td>
+      <td>0.355750</td>
+      <td>0.348610</td>
+      <td>0.369400</td>
+      <td>0.376240</td>
+      <td>0.366250</td>
+      <td>0.401610</td>
+    </tr>
+    <tr>
+      <th>val/box_loss</th>
+      <td>0.034515</td>
+      <td>0.039519</td>
+      <td>0.038128</td>
+      <td>0.031879</td>
+      <td>0.030298</td>
+      <td>0.031223</td>
+      <td>0.030203</td>
+      <td>0.027902</td>
+      <td>0.028723</td>
+      <td>0.028125</td>
+    </tr>
+    <tr>
+      <th>val/obj_loss</th>
+      <td>0.029060</td>
+      <td>0.028952</td>
+      <td>0.028381</td>
+      <td>0.027891</td>
+      <td>0.027544</td>
+      <td>0.027853</td>
+      <td>0.027591</td>
+      <td>0.027314</td>
+      <td>0.026769</td>
+      <td>0.026690</td>
+    </tr>
+    <tr>
+      <th>val/cls_loss</th>
+      <td>0.013501</td>
+      <td>0.012913</td>
+      <td>0.012397</td>
+      <td>0.012146</td>
+      <td>0.012613</td>
+      <td>0.012582</td>
+      <td>0.011706</td>
+      <td>0.011553</td>
+      <td>0.011571</td>
+      <td>0.011273</td>
+    </tr>
+    <tr>
+      <th>x/lr0</th>
+      <td>0.002596</td>
+      <td>0.002470</td>
+      <td>0.002293</td>
+      <td>0.002078</td>
+      <td>0.001839</td>
+      <td>0.001592</td>
+      <td>0.001357</td>
+      <td>0.001152</td>
+      <td>0.000996</td>
+      <td>0.000907</td>
+    </tr>
+    <tr>
+      <th>x/lr1</th>
+      <td>0.002596</td>
+      <td>0.002470</td>
+      <td>0.002293</td>
+      <td>0.002078</td>
+      <td>0.001839</td>
+      <td>0.001592</td>
+      <td>0.001357</td>
+      <td>0.001152</td>
+      <td>0.000996</td>
+      <td>0.000907</td>
+    </tr>
+    <tr>
+      <th>x/lr2</th>
+      <td>0.055396</td>
+      <td>0.050970</td>
+      <td>0.046493</td>
+      <td>0.041978</td>
+      <td>0.037439</td>
+      <td>0.032892</td>
+      <td>0.028357</td>
+      <td>0.023852</td>
+      <td>0.019396</td>
+      <td>0.015007</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </div>
 </div>
 
