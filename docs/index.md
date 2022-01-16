@@ -1,4 +1,5 @@
-# PyTorch 教程与参考
+```{include} ../README.md
+```
 
 ```{div} w3-pale-green w3-card w3-padding w3-round-xlarge w3-margin-top
 欢迎进入 PyTorch 世界！

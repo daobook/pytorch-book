@@ -13,7 +13,7 @@ copyright: "2021" # 版权年份将放置在页脚中
 logo: logo.jpg # 图书徽标的路径
 
 # 制作书籍时跳过的模式。可以是 glob-style (例如 "*skip.ipynb")
-exclude_patterns: [_build, Thumbs.db, .DS_Store, "yolo/models","**.ipynb_checkpoints", "atom/**", "**.pt"]
+exclude_patterns: [_build, Thumbs.db, .DS_Store, "yolo/face-mask/yolov5", "yolo/models","**.ipynb_checkpoints", "atom/**", "**.pt"]
 # 自动排除目录中的文件
 only_build_toc_files: false
 
