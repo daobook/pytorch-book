@@ -343,11 +343,6 @@ commentsRunWhenDOMLoaded(addUtterances);
        测试
       </a>
      </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="test.html">
-       口罩识别测试
-      </a>
-     </li>
     </ul>
    </li>
   </ul>
@@ -584,14 +579,7 @@ commentsRunWhenDOMLoaded(addUtterances);
             
               <div>
                 
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!python train.py --img 640 --batch 16 --epochs 5 --data coco128.yaml --weights yolov5s.pt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
 <h1>模型训练<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
@@ -613,16 +601,12 @@ commentsRunWhenDOMLoaded(addUtterances);
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;yolov5s&#39;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;yolov5m&#39;</span>
 <span class="n">image_size</span> <span class="o">=</span> <span class="mi">640</span>
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">device</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
 <span class="n">saved_model_name</span> <span class="o">=</span> <span class="s1">&#39;best.pt&#39;</span>
-
-<span class="c1"># for test</span>
-<span class="n">confidence_threshold</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="c1"># Threshold of object inference</span>
-<span class="n">iou_threshold</span> <span class="o">=</span> <span class="mf">0.45</span> <span class="c1"># Threshold of remove overlapping boxes</span>
 
 <span class="n">device</span>
 </pre></div>
@@ -636,24 +620,15 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span> <span class="o">=</span> <span class="o">!</span><span class="nb">pwd</span> # <span class="o">[</span><span class="s1">&#39;/kaggle/working&#39;</span><span class="o">]</span>
-<span class="n">pwd</span> <span class="o">=</span> <span class="n">pwd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
-<span class="n">yolo_path</span> <span class="o">=</span> <span class="n">pwd</span> <span class="o">+</span> <span class="s1">&#39;yolov5/&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!python yolov5/train.py --weights yolov5s.pt \
-        --cfg yolov5/models/yolov5s.yaml --data datasets/face_mask.yaml \
-        --hyp yolov5/data/hyps/hyp.scratch.yaml --epochs 10 --batch-size 32 \
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!python yolov5/train.py --weights yolov5m.pt \
+        --cfg yolov5/models/yolov5m.yaml --data datasets/face_mask.yaml \
+        --hyp yolov5/data/hyps/hyp.scratch.yaml --epochs 20 --batch-size 16 \
         --img-size 640 --device 0
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>weights=yolov5s.pt, cfg=yolov5/models/yolov5s.yaml, data=datasets/face_mask.yaml, hyp=yolov5/data/hyps/hyp.scratch.yaml, epochs=10, batch_size=32, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=yolov5/runs/train, name=exp, exist_ok=False, quad=False, linear_lr=False, label_smoothing=0.0, patience=100, freeze=[0], save_period=-1, local_rank=-1, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>weights=yolov5m.pt, cfg=yolov5/models/yolov5m.yaml, data=datasets/face_mask.yaml, hyp=yolov5/data/hyps/hyp.scratch.yaml, epochs=20, batch_size=16, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=yolov5/runs/train, name=exp, exist_ok=False, quad=False, linear_lr=False, label_smoothing=0.0, patience=100, freeze=[0], save_period=-1, local_rank=-1, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
 <span class=" -Color -Color-Bold -Color-Bold-Blue">github: </span>up to date with https://github.com.cnpmjs.org/ultralytics/yolov5 ✅
 YOLOv5 🚀 v6.0-192-g436ffc4 torch 1.10.1 CUDA:0 (NVIDIA GeForce RTX 2080 Ti, 11017MiB)
 
@@ -663,116 +638,166 @@ YOLOv5 🚀 v6.0-192-g436ffc4 torch 1.10.1 CUDA:0 (NVIDIA GeForce RTX 2080 Ti, 1
 Overriding model.yaml nc=80 with nc=3
 
                  from  n    params  module                                  arguments                     
-  0                -1  1      3520  models.common.Conv                      [3, 32, 6, 2, 2]              
-  1                -1  1     18560  models.common.Conv                      [32, 64, 3, 2]                
-  2                -1  1     18816  models.common.C3                        [64, 64, 1]                   
-  3                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
-  4                -1  2    115712  models.common.C3                        [128, 128, 2]                 
-  5                -1  1    295424  models.common.Conv                      [128, 256, 3, 2]              
-  6                -1  3    625152  models.common.C3                        [256, 256, 3]                 
-  7                -1  1   1180672  models.common.Conv                      [256, 512, 3, 2]              
-  8                -1  1   1182720  models.common.C3                        [512, 512, 1]                 
-  9                -1  1    656896  models.common.SPPF                      [512, 512, 5]                 
- 10                -1  1    131584  models.common.Conv                      [512, 256, 1, 1]              
+  0                -1  1      5280  models.common.Conv                      [3, 48, 6, 2, 2]              
+  1                -1  1     41664  models.common.Conv                      [48, 96, 3, 2]                
+  2                -1  2     65280  models.common.C3                        [96, 96, 2]                   
+  3                -1  1    166272  models.common.Conv                      [96, 192, 3, 2]               
+  4                -1  4    444672  models.common.C3                        [192, 192, 4]                 
+  5                -1  1    664320  models.common.Conv                      [192, 384, 3, 2]              
+  6                -1  6   2512896  models.common.C3                        [384, 384, 6]                 
+  7                -1  1   2655744  models.common.Conv                      [384, 768, 3, 2]              
+  8                -1  2   4134912  models.common.C3                        [768, 768, 2]                 
+  9                -1  1   1476864  models.common.SPPF                      [768, 768, 5]                 
+ 10                -1  1    295680  models.common.Conv                      [768, 384, 1, 1]              
  11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
  12           [-1, 6]  1         0  models.common.Concat                    [1]                           
- 13                -1  1    361984  models.common.C3                        [512, 256, 1, False]          
- 14                -1  1     33024  models.common.Conv                      [256, 128, 1, 1]              
+ 13                -1  2   1182720  models.common.C3                        [768, 384, 2, False]          
+ 14                -1  1     74112  models.common.Conv                      [384, 192, 1, 1]              
  15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
  16           [-1, 4]  1         0  models.common.Concat                    [1]                           
- 17                -1  1     90880  models.common.C3                        [256, 128, 1, False]          
- 18                -1  1    147712  models.common.Conv                      [128, 128, 3, 2]              
+ 17                -1  2    296448  models.common.C3                        [384, 192, 2, False]          
+ 18                -1  1    332160  models.common.Conv                      [192, 192, 3, 2]              
  19          [-1, 14]  1         0  models.common.Concat                    [1]                           
- 20                -1  1    296448  models.common.C3                        [256, 256, 1, False]          
- 21                -1  1    590336  models.common.Conv                      [256, 256, 3, 2]              
+ 20                -1  2   1035264  models.common.C3                        [384, 384, 2, False]          
+ 21                -1  1   1327872  models.common.Conv                      [384, 384, 3, 2]              
  22          [-1, 10]  1         0  models.common.Concat                    [1]                           
- 23                -1  1   1182720  models.common.C3                        [512, 512, 1, False]          
- 24      [17, 20, 23]  1     21576  models.yolo.Detect                      [3, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [128, 256, 512]]
-Model Summary: 270 layers, 7027720 parameters, 7027720 gradients, 15.9 GFLOPs
+ 23                -1  2   4134912  models.common.C3                        [768, 768, 2, False]          
+ 24      [17, 20, 23]  1     32328  models.yolo.Detect                      [3, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [192, 384, 768]]
+Model Summary: 369 layers, 20879400 parameters, 20879400 gradients, 48.1 GFLOPs
 
-Transferred 342/349 items from yolov5s.pt
+Transferred 474/481 items from yolov5m.pt
 Scaled weight_decay = 0.0005
-<span class=" -Color -Color-Bold -Color-Bold-Blue">optimizer:</span> SGD with parameter groups 57 weight, 60 weight (no decay), 60 bias
+<span class=" -Color -Color-Bold -Color-Bold-Blue">optimizer:</span> SGD with parameter groups 79 weight, 82 weight (no decay), 82 bias
 <span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>Scanning &#39;/home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/l
 <span class=" -Color -Color-Bold -Color-Bold-Blue">val: </span>Scanning &#39;/home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/lab
-Plotting labels to yolov5/runs/train/exp2/labels.jpg... 
+Plotting labels to yolov5/runs/train/exp3/labels.jpg... 
 
 <span class=" -Color -Color-Bold -Color-Bold-Blue">AutoAnchor: </span>5.62 anchors/target, 0.999 Best Possible Recall (BPR). Current anchors are a good fit to dataset ✅
 Image sizes 640 train, 640 val
 Using 8 dataloader workers
-Logging results to <span class=" -Color -Color-Bold">yolov5/runs/train/exp2</span>
-Starting training for 10 epochs...
+Logging results to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
+Starting training for 20 epochs...
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       0/9        7G    0.1158   0.05063   0.03604        62       640: 100%|███
+      0/19     6.35G    0.1114    0.0574   0.03781        60       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884    0.00245     0.0322    0.00125   0.000251
+                 all        166        884    0.00842     0.0223     0.0027   0.000527
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       1/9     9.22G    0.1015   0.06092   0.02805        84       640: 100%|███
+      1/19      7.9G   0.09343   0.06483   0.02785        97       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884     0.0244     0.0465    0.00962    0.00177
+                 all        166        884      0.711     0.0986     0.0349    0.00733
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       2/9     9.22G   0.08742   0.06462   0.02308        94       640: 100%|███
+      2/19      7.9G   0.07669   0.05572   0.02183        77       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.783     0.0844     0.0789     0.0196
+                 all        166        884      0.818       0.17       0.16      0.047
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       3/9     9.22G   0.07709   0.05629   0.02034       121       640: 100%|███
+      3/19      7.9G    0.0673   0.04677   0.01904        68       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.815      0.129      0.128     0.0339
+                 all        166        884      0.794      0.207      0.157     0.0457
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       4/9     9.22G   0.06944   0.04896   0.01917        44       640: 100%|███
+      4/19      7.9G   0.07019    0.0433   0.01816       128       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.854       0.16      0.191     0.0569
+                 all        166        884      0.854      0.202      0.245     0.0722
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       5/9     9.22G   0.06292   0.04433   0.01906        63       640: 100%|███
+      5/19      7.9G   0.06222   0.04017   0.01793        56       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.853       0.19      0.217     0.0686
+                 all        166        884      0.535      0.481       0.34      0.112
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       6/9     9.22G   0.05923   0.04341   0.01844        71       640: 100%|███
+      6/19      7.9G   0.05849   0.03926    0.0155        56       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.886      0.188      0.247     0.0874
+                 all        166        884      0.718      0.462       0.46      0.181
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       7/9     9.22G   0.05522   0.04333   0.01853       124       640: 100%|███
+      7/19      7.9G   0.05397   0.03689   0.01258        55       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.876      0.249      0.292       0.11
+                 all        166        884       0.66        0.5      0.437      0.152
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       8/9     9.22G   0.05052   0.04093   0.01832       121       640: 100%|███
+      8/19      7.9G   0.05181   0.03488   0.01007        85       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.656      0.349      0.339       0.14
+                 all        166        884      0.799      0.531       0.56      0.248
 
      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       9/9     9.22G   0.04766   0.04189   0.01874       130       640: 100%|███
+      9/19      7.9G   0.04914   0.03424  0.009249        88       640: 100%|███
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884        0.7      0.349       0.35      0.151
+                 all        166        884      0.813      0.451       0.51       0.25
 
-10 epochs completed in 0.032 hours.
-Optimizer stripped from yolov5/runs/train/exp2/weights/last.pt, 14.4MB
-Optimizer stripped from yolov5/runs/train/exp2/weights/best.pt, 14.4MB
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     10/19      7.9G   0.04514   0.03329   0.00896       100       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.892      0.537      0.591      0.289
 
-Validating yolov5/runs/train/exp2/weights/best.pt...
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     11/19      7.9G   0.04465   0.03296  0.009033       125       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.731      0.532      0.498      0.227
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     12/19      7.9G   0.04644   0.03219  0.008192       166       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.862      0.482      0.553      0.305
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     13/19      7.9G   0.04083   0.02862    0.0073       104       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.912       0.54      0.607       0.33
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     14/19      7.9G   0.03902   0.02835  0.007547        71       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.916      0.544      0.608      0.356
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     15/19      7.9G   0.03599   0.02966  0.007395        69       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.935      0.538      0.614      0.349
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     16/19      7.9G   0.03503   0.03209   0.00704       175       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.911      0.578      0.628      0.369
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     17/19      7.9G   0.03377    0.0302  0.006996        93       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.924      0.586      0.636      0.376
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     18/19      7.9G   0.03048   0.02786  0.006852       115       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.941      0.557      0.638      0.366
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     19/19      7.9G   0.02994   0.02897  0.006748       109       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.915      0.585      0.661      0.402
+
+20 epochs completed in 0.080 hours.
+Optimizer stripped from yolov5/runs/train/exp3/weights/last.pt, 42.2MB
+Optimizer stripped from yolov5/runs/train/exp3/weights/best.pt, 42.2MB
+
+Validating yolov5/runs/train/exp3/weights/best.pt...
 Fusing layers... 
-Model Summary: 213 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
+Model Summary: 290 layers, 20861016 parameters, 0 gradients, 48.0 GFLOPs
                Class     Images     Labels          P          R     mAP@.5 mAP@
-                 all        166        884      0.696      0.349      0.349       0.15
-           with_mask        166        703      0.445        0.9      0.772      0.345
-mask_weared_incorrect        166         31          1          0     0.0476     0.0222
-        without_mask        166        150      0.645      0.147      0.227     0.0839
-Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp2</span>
+                 all        166        884      0.919      0.585      0.662      0.401
+           with_mask        166        703      0.891      0.935      0.956      0.605
+mask_weared_incorrect        166         31          1          0      0.135     0.0871
+        without_mask        166        150      0.865       0.82      0.896      0.512
+Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mv yolov5/runs/train/exp2/weights/ submission/
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp -r yolov5/runs/train/exp3/weights/ submission/
 </pre></div>
 </div>
 </div>
@@ -782,17 +807,37 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp2</span>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp/val_batch2_pred.jpg&#39;</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/labels.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_8_0.jpg" src="../../_images/01_train_8_0.jpg" />
+<img alt="../../_images/01_train_6_0.jpg" src="../../_images/01_train_6_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp/P_curve.png&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/P_curve.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01_train_7_0.png" src="../../_images/01_train_7_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/R_curve.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01_train_8_0.png" src="../../_images/01_train_8_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/PR_curve.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -802,17 +847,17 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp2</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp/R_curve.png&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/labels_correlogram.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_10_0.png" src="../../_images/01_train_10_0.png" />
+<img alt="../../_images/01_train_10_0.jpg" src="../../_images/01_train_10_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp/PR_curve.png&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/F1_curve.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -822,32 +867,12 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp2</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp/labels_correlogram.jpg&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp3/val_batch1_pred.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/01_train_12_0.jpg" src="../../_images/01_train_12_0.jpg" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp/labels.jpg&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/01_train_13_0.jpg" src="../../_images/01_train_13_0.jpg" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;yolov5/runs/train/exp/F1_curve.png&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/01_train_14_0.png" src="../../_images/01_train_14_0.png" />
 </div>
 </div>
 </div>

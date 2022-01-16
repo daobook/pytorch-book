@@ -91,7 +91,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="shortcut icon" href="../../_static/page-logo.jfif"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
-    <link rel="next" title="口罩识别测试" href="test.html" />
+    <link rel="next" title="参考" href="../../other/index.html" />
     <link rel="prev" title="模型训练" href="01_train.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh">
@@ -341,11 +341,6 @@ commentsRunWhenDOMLoaded(addUtterances);
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
        测试
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="test.html">
-       口罩识别测试
       </a>
      </li>
     </ul>
@@ -613,25 +608,25 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!python yolov5/detect.py --weights submission/weights/best.pt \
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!python yolov5/detect.py --weights submission/best.pt \
     --source datasets/images/test --img-size 640 \
         --conf-thres 0.6 --iou-thres 0.6  --device 0
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">detect: </span>weights=[&#39;submission/weights/best.pt&#39;], source=datasets/images/test, data=yolov5/data/coco128.yaml, imgsz=[640, 640], conf_thres=0.6, iou_thres=0.6, max_det=1000, device=0, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=yolov5/runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">detect: </span>weights=[&#39;submission/best.pt&#39;], source=datasets/images/test, data=yolov5/data/coco128.yaml, imgsz=[640, 640], conf_thres=0.6, iou_thres=0.6, max_det=1000, device=0, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=yolov5/runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False
 YOLOv5 🚀 v6.0-192-g436ffc4 torch 1.10.1 CUDA:0 (NVIDIA GeForce RTX 2080 Ti, 11017MiB)
 
 Fusing layers... 
-Model Summary: 213 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
-image 1/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss17.png: 640x512 1 with_mask, Done. (0.026s)
-image 2/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss18.png: 448x640 2 with_masks, Done. (0.025s)
-image 3/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss581.png: 640x512 1 with_mask, Done. (0.017s)
-image 4/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss753.png: 448x640 2 with_masks, Done. (0.016s)
-image 5/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss76.png: 416x640 2 with_masks, Done. (0.025s)
-Speed: 0.4ms pre-process, 21.6ms inference, 1.4ms NMS per image at shape (1, 3, 640, 640)
-Results saved to <span class=" -Color -Color-Bold">yolov5/runs/detect/exp3</span>
+Model Summary: 290 layers, 20861016 parameters, 0 gradients, 48.0 GFLOPs
+image 1/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss17.png: 640x512 1 with_mask, Done. (0.034s)
+image 2/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss18.png: 448x640 2 with_masks, Done. (0.032s)
+image 3/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss581.png: 640x512 1 with_mask, Done. (0.022s)
+image 4/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss753.png: 448x640 6 with_masks, Done. (0.022s)
+image 5/5 /home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/images/test/maksssksksss76.png: 416x640 3 with_masks, Done. (0.032s)
+Speed: 0.4ms pre-process, 28.1ms inference, 1.4ms NMS per image at shape (1, 3, 640, 640)
+Results saved to <span class=" -Color -Color-Bold">yolov5/runs/detect/exp</span>
 </pre></div>
 </div>
 </div>
@@ -647,7 +642,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/detect/exp3</span
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">submission_path</span> <span class="o">=</span> <span class="s1">&#39;yolov5/runs/detect/exp2/&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">submission_path</span> <span class="o">=</span> <span class="s1">&#39;yolov5/runs/detect/exp/&#39;</span>
 <span class="n">origin_path</span> <span class="o">=</span> <span class="s1">&#39;datasets/images/val/&#39;</span>
 <span class="n">predict_images</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">submission_path</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.png&#39;</span><span class="p">)]</span>
 </pre></div>
@@ -663,7 +658,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/detect/exp3</span
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">predict_images</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">predict_images</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -673,7 +668,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/detect/exp3</span
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">predict_images</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">predict_images</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -716,10 +711,10 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/detect/exp3</span
             <p class="prev-next-title">模型训练</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="test.html" title="下一页 页">
+    <a class='right-next' id="next-link" href="../../other/index.html" title="下一页 页">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">下一页</p>
-        <p class="prev-next-title">口罩识别测试</p>
+        <p class="prev-next-title">参考</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
