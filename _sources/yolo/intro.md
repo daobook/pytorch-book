@@ -83,4 +83,17 @@ YOLOv1 是由 Joseph Redmon 作为研究论文发布的。该论文的标题是 
 
 ![](./images/model_plot.png)
 
+## 训练
+
+运行下面的命令在 COCO 数据集上重现结果（数据集第一次使用时自动下载）。在单个 V100 上，YOLOv5s/m/l/x 的训练时间是2/4/6/8天（多 gpu 更快）。使用 GPU 允许的最大批处理大小（16GB 设备的批处理大小）。
+
+```shell
+python train.py --data coco.yaml --cfg yolov5s.yaml --weights '' --batch-size 64
+                                         yolov5m                                40
+                                         yolov5l                                24
+                                         yolov5x                                16
+```
+
+![](./images/coco-yolov5.png)
+
 有关训练、测试和部署的完整文档，请参见 [YOLOv5 文档](https://docs.ultralytics.com/)。

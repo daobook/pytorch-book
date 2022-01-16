@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YOLOV5</title>
+    <title>口罩识别测试</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -87,12 +87,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <link rel="canonical" href="https://xinetzone.github.io/pytorch-book/yolo/yolov5/index.html" />
+    <link rel="canonical" href="https://xinetzone.github.io/pytorch-book/yolo/face-mask/test.html" />
     <link rel="shortcut icon" href="../../_static/page-logo.jfif"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
-    <link rel="next" title="训练自定义数据 📌" href="01_train-custom-datasets.html" />
-    <link rel="prev" title="Transfer Learning with Frozen Layers" href="../tutorials/11_transfer-learning-froze-layers.html" />
+    <link rel="next" title="参考" href="../../other/index.html" />
+    <link rel="prev" title="数据制作" href="00_dataset.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh">
     
@@ -219,11 +219,6 @@ commentsRunWhenDOMLoaded(addUtterances);
      快速入门
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../use.html">
-     简单使用
-    </a>
-   </li>
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="../environments/index.html">
      环境
@@ -263,7 +258,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <ul>
      <li class="toctree-l3">
       <a class="reference internal" href="../tutorials/00_train-custom-datasets.html">
-       训练自定义数据
+       自定义数据 📌
       </a>
      </li>
      <li class="toctree-l3">
@@ -324,32 +319,22 @@ commentsRunWhenDOMLoaded(addUtterances);
     </ul>
    </li>
    <li class="toctree-l2 current active has-children">
-    <a class="current reference internal" href="#">
-     YOLOV5
+    <a class="reference internal" href="index.html">
+     口罩识别
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
     <label for="toctree-checkbox-6">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul>
+    <ul class="current">
      <li class="toctree-l3">
-      <a class="reference internal" href="01_train-custom-datasets.html">
-       训练自定义数据 📌
+      <a class="reference internal" href="00_dataset.html">
+       数据制作
       </a>
      </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="face-mask.html">
-       口罩识别
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="test.html">
-       测试
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="test-face-mask.html">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
        口罩识别测试
       </a>
      </li>
@@ -477,9 +462,9 @@ commentsRunWhenDOMLoaded(addUtterances);
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/yolo/yolov5/index.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/yolo/face-mask/test.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="下载源文件" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="列印成PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -497,10 +482,10 @@ commentsRunWhenDOMLoaded(addUtterances);
                 data-toggle="tooltip" data-placement="left" title="源库"><i
                     class="fab fa-github"></i>资料库</button></a>
         <a class="issues-button"
-            href="https://github.com/xinetzone/pytorch-book/issues/new?title=Issue%20on%20page%20%2Fyolo/yolov5/index.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/xinetzone/pytorch-book/issues/new?title=Issue%20on%20page%20%2Fyolo/face-mask/test.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="打开一个问题"><i class="fas fa-lightbulb"></i>公开的问题</button></a>
-        <a class="edit-button" href="https://github.com/xinetzone/pytorch-book/edit/main/docs/yolo/yolov5/index.md"><button
+        <a class="edit-button" href="https://github.com/xinetzone/pytorch-book/edit/main/docs/yolo/face-mask/test.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="编辑这个页面"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -515,6 +500,31 @@ commentsRunWhenDOMLoaded(addUtterances);
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/xinetzone/pytorch-book/main?urlpath=tree/docs/yolo/face-mask/test.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="发射 Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/xinetzone/pytorch-book/blob/main/docs/yolo/face-mask/test.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="发射 Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="发射 Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -527,7 +537,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>YOLOV5</h1>
+                <h1>口罩识别测试</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -538,9 +548,80 @@ commentsRunWhenDOMLoaded(addUtterances);
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="yolov5">
-<h1>YOLOV5<a class="headerlink" href="#yolov5" title="永久链接至标题">¶</a></h1>
-<div class="toctree-wrapper compound">
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>口罩识别测试<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="s1">&#39;models/&#39;</span><span class="p">)</span> <span class="c1"># 设置模型保持目录</span>
+<span class="c1"># 模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ultralytics/yolov5&#39;</span><span class="p">,</span> <span class="s1">&#39;yolov5s&#39;</span><span class="p">)</span>  <span class="c1"># or yolov5m, yolov5x, custom</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cache found in models/ultralytics_yolov5_master
+YOLOv5  fe52ad5 torch 1.10.0 CUDA:0 (NVIDIA GeForce GTX 1080 Ti, 11264MiB)
+
+Fusing layers... 
+Model Summary: 213 layers, 7225885 parameters, 0 gradients
+Adding AutoShape... 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install -q roboflow
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
+WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
+WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
+WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
+WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
+WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">clear_output</span>  <span class="c1"># to display images</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setup complete. Using torch </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_properties</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;CPU&#39;</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Setup complete. Using torch 1.10.0 (NVIDIA GeForce GTX 1080 Ti)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">roboflow</span> <span class="kn">import</span> <span class="n">Roboflow</span>
+<span class="n">rf</span> <span class="o">=</span> <span class="n">Roboflow</span><span class="p">(</span><span class="n">model_format</span><span class="o">=</span><span class="s2">&quot;yolov5&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="s2">&quot;ultralytics&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">2</span><span class="n">f6135367ffe</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">roboflow</span> <span class="kn">import</span> <span class="n">Roboflow</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">rf</span> <span class="o">=</span> <span class="n">Roboflow</span><span class="p">(</span><span class="n">model_format</span><span class="o">=</span><span class="s2">&quot;yolov5&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="s2">&quot;ultralytics&quot;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: __init__() got an unexpected keyword argument &#39;model_format&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -553,33 +634,33 @@ commentsRunWhenDOMLoaded(addUtterances);
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "torch"
         },
         kernelOptions: {
-            kernelName: "python3",
-            path: "./yolo/yolov5"
+            kernelName: "torch",
+            path: "./yolo/face-mask"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'torch'</script>
 
               </div>
               
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../tutorials/11_transfer-learning-froze-layers.html" title="上一页 页">
+    <a class='left-prev' id="prev-link" href="00_dataset.html" title="上一页 页">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">上一页</p>
-            <p class="prev-next-title">Transfer Learning with Frozen Layers</p>
+            <p class="prev-next-title">数据制作</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="01_train-custom-datasets.html" title="下一页 页">
+    <a class='right-next' id="next-link" href="../../other/index.html" title="下一页 页">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">下一页</p>
-        <p class="prev-next-title">训练自定义数据 📌</p>
+        <p class="prev-next-title">参考</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
