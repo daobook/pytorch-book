@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>数据制作</title>
+    <title>模型训练</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -79,8 +79,6 @@ commentsRunWhenDOMLoaded(addUtterances);
 </script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -89,12 +87,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <link rel="canonical" href="https://xinetzone.github.io/pytorch-book/yolo/face-mask/00_dataset.html" />
+    <link rel="canonical" href="https://xinetzone.github.io/pytorch-book/yolo/face-mask/01_train.html" />
     <link rel="shortcut icon" href="../../_static/page-logo.jfif"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="口罩识别测试" href="test.html" />
-    <link rel="prev" title="口罩识别" href="index.html" />
+    <link rel="prev" title="准备工作" href="00_loader.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh">
     
@@ -330,9 +328,14 @@ commentsRunWhenDOMLoaded(addUtterances);
      </i>
     </label>
     <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="00_loader.html">
+       准备工作
+      </a>
+     </li>
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
-       数据制作
+       模型训练
       </a>
      </li>
      <li class="toctree-l3">
@@ -464,7 +467,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/yolo/face-mask/00_dataset.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/yolo/face-mask/01_train.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="下载源文件" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -484,10 +487,10 @@ commentsRunWhenDOMLoaded(addUtterances);
                 data-toggle="tooltip" data-placement="left" title="源库"><i
                     class="fab fa-github"></i>资料库</button></a>
         <a class="issues-button"
-            href="https://github.com/xinetzone/pytorch-book/issues/new?title=Issue%20on%20page%20%2Fyolo/face-mask/00_dataset.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/xinetzone/pytorch-book/issues/new?title=Issue%20on%20page%20%2Fyolo/face-mask/01_train.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="打开一个问题"><i class="fas fa-lightbulb"></i>公开的问题</button></a>
-        <a class="edit-button" href="https://github.com/xinetzone/pytorch-book/edit/main/docs/yolo/face-mask/00_dataset.ipynb"><button
+        <a class="edit-button" href="https://github.com/xinetzone/pytorch-book/edit/main/docs/yolo/face-mask/01_train.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="编辑这个页面"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -507,7 +510,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/xinetzone/pytorch-book/main?urlpath=tree/docs/yolo/face-mask/00_dataset.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/xinetzone/pytorch-book/main?urlpath=tree/docs/yolo/face-mask/01_train.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="发射 Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -515,7 +518,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/xinetzone/pytorch-book/blob/main/docs/yolo/face-mask/00_dataset.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/xinetzone/pytorch-book/blob/main/docs/yolo/face-mask/01_train.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="发射 Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -532,24 +535,6 @@ commentsRunWhenDOMLoaded(addUtterances);
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> 内容
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   复制图片数据
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   制作标签数据
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -557,142 +542,139 @@ commentsRunWhenDOMLoaded(addUtterances);
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>数据制作</h1>
+                <h1>模型训练</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> 内容 </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   复制图片数据
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   制作标签数据
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>数据制作<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>详细内容见：<a class="reference internal" href="../tutorials/00_train-custom-datasets.html#yolo-tutorials-train-custom-datasets"><span class="std std-ref">训练自定义数据</span></a></p>
-<p>从 Kaggle 下载 <a class="reference external" href="https://www.kaggle.com/andrewmvd/face-mask-detection">数据集</a>：</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>kaggle datasets download -d andrewmvd/face-mask-detection
-</pre></div>
-</div>
-<p>解压到 <code class="docutils literal notranslate"><span class="pre">root</span></code>（可自行决定）：</p>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 数据集根目录</span>
-<span class="n">root</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;E:\kaggle\datasets\face-mask-detection&quot;</span>
-<span class="c1"># 标签名称</span>
-<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;with_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;mask_weared_incorrect&#39;</span><span class="p">,</span> <span class="s1">&#39;without_mask&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!python train.py --img 640 --batch 16 --epochs 5 --data coco128.yaml --weights yolov5s.pt</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>导入一些库：</p>
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>模型训练<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">utils.file</span> <span class="kn">import</span> <span class="n">ObjectPath</span>
+<span class="n">ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;yolov5/&#39;</span><span class="p">)</span> <span class="c1"># YOLOv5 根目录</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>将数据集划分为训练集（<span class="math notranslate nohighlight">\(80\%\)</span>）、验证集（<span class="math notranslate nohighlight">\(20\%\)</span>）。</p></li>
-<li><p>从验证集取出若干（如 <code class="docutils literal notranslate"><span class="pre">show_count=5</span></code>）作为测试集。</p></li>
-</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ObjectPath</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
-<span class="n">dataset</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">show_count</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>查看测试集：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">images_test</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;yolov5m&#39;</span>
+<span class="n">image_size</span> <span class="o">=</span> <span class="mi">640</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
+<span class="n">saved_model_name</span> <span class="o">=</span> <span class="s1">&#39;best.pt&#39;</span>
+
+<span class="c1"># for test</span>
+<span class="n">confidence_threshold</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="c1"># Threshold of object inference</span>
+<span class="n">iou_threshold</span> <span class="o">=</span> <span class="mf">0.45</span> <span class="c1"># Threshold of remove overlapping boxes</span>
+
+<span class="n">device</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss466.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss697.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss615.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss462.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss634.png&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;0&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">labels_test</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">train</span>
+
+<span class="n">train</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;datasets/data.yaml&#39;</span><span class="p">,</span>
+          <span class="n">cfg</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s1">/models/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">,</span>
+          <span class="n">hyp</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s1">/data/hyps/hyp.scratch.yaml&#39;</span><span class="p">,</span>
+          <span class="n">imgsz</span><span class="o">=</span><span class="n">image_size</span><span class="p">,</span>
+          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+          <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+          <span class="n">weights</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;models/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s1">.pt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss466.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss697.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss615.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss462.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss634.xml&#39;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>weights=models/yolov5m.pt, cfg=yolov5/models/yolov5m.yaml, data=datasets/data.yaml, hyp=yolov5/data/hyps/hyp.scratch.yaml, epochs=10, batch_size=16, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=yolov5\runs\train, name=exp, exist_ok=False, quad=False, linear_lr=False, label_smoothing=0.0, patience=100, freeze=[0], save_period=-1, local_rank=-1, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="id2">
-<h2>复制图片数据<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_root</span> <span class="o">=</span> <span class="s1">&#39;datasets&#39;</span> <span class="c1"># 目标目录</span>
-<span class="n">images_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">new_root</span><span class="si">}</span><span class="s2">/images&quot;</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">github: </span>up to date with https://github.com.cnpmjs.org/ultralytics/yolov5 
 </pre></div>
 </div>
-</div>
-</div>
-<p>将图片数据按照已经划分好的规则复制到新的目录：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">copy_images</span><span class="p">(</span><span class="n">images_dir</span><span class="p">)</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>YOLOv5  v6.0-192-g436ffc4 torch 1.10.0 CUDA:0 (NVIDIA GeForce GTX 1080 Ti, 11264MiB)
+
+<span class=" -Color -Color-Bold -Color-Bold-Blue">hyperparameters: </span>lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, cls_pw=1.0, obj=1.0, obj_pw=1.0, iou_t=0.2, anchor_t=4.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.0, copy_paste=0.0
+<span class=" -Color -Color-Bold -Color-Bold-Blue">TensorBoard: </span>Start with &#39;tensorboard --logdir yolov5\runs\train&#39;, view at http://localhost:6006/
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="id3">
-<h2>制作标签数据<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">new_root</span><span class="si">}</span><span class="s2">/labels&quot;</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">Weights &amp; Biases: </span>run &#39;pip install wandb&#39; to automatically track and visualize YOLOv5  runs (RECOMMENDED)
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5m.pt to models\yolov5m.pt...
 </pre></div>
 </div>
-</div>
-</div>
-<p>标签需要归一化：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">write_labels</span><span class="p">(</span><span class="n">labels_dir</span><span class="p">)</span>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "4648d98ebcfd48f68f529711184cf392", "version_major": 2, "version_minor": 0}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overriding model.yaml nc=80 with nc=3
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1      5280  models.common.Conv                      [3, 48, 6, 2, 2]              
+  1                -1  1     41664  models.common.Conv                      [48, 96, 3, 2]                
+  2                -1  2     65280  models.common.C3                        [96, 96, 2]                   
+  3                -1  1    166272  models.common.Conv                      [96, 192, 3, 2]               
+  4                -1  4    444672  models.common.C3                        [192, 192, 4]                 
+  5                -1  1    664320  models.common.Conv                      [192, 384, 3, 2]              
+  6                -1  6   2512896  models.common.C3                        [384, 384, 6]                 
+  7                -1  1   2655744  models.common.Conv                      [384, 768, 3, 2]              
+  8                -1  2   4134912  models.common.C3                        [768, 768, 2]                 
+  9                -1  1   1476864  models.common.SPPF                      [768, 768, 5]                 
+ 10                -1  1    295680  models.common.Conv                      [768, 384, 1, 1]              
+ 11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
+ 12           [-1, 6]  1         0  models.common.Concat                    [1]                           
+ 13                -1  2   1182720  models.common.C3                        [768, 384, 2, False]          
+ 14                -1  1     74112  models.common.Conv                      [384, 192, 1, 1]              
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
+ 16           [-1, 4]  1         0  models.common.Concat                    [1]                           
+ 17                -1  2    296448  models.common.C3                        [384, 192, 2, False]          
+ 18                -1  1    332160  models.common.Conv                      [192, 192, 3, 2]              
+ 19          [-1, 14]  1         0  models.common.Concat                    [1]                           
+ 20                -1  2   1035264  models.common.C3                        [384, 384, 2, False]          
+ 21                -1  1   1327872  models.common.Conv                      [384, 384, 3, 2]              
+ 22          [-1, 10]  1         0  models.common.Concat                    [1]                           
+ 23                -1  2   4134912  models.common.C3                        [768, 768, 2, False]          
+ 24      [17, 20, 23]  1     32328  models.yolo.Detect                      [3, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [192, 384, 768]]
+Model Summary: 369 layers, 20879400 parameters, 20879400 gradients, 48.1 GFLOPs
+
+Transferred 474/481 items from models\yolov5m.pt
+Scaled weight_decay = 0.0005
+<span class=" -Color -Color-Bold -Color-Bold-Blue">optimizer:</span> SGD with parameter groups 79 weight, 82 weight (no decay), 82 bias
+WARNING: DP not recommended, use torch.distributed.run for best DDP Multi-GPU results.
+See Multi-GPU Tutorial at https://github.com/ultralytics/yolov5/issues/475 to get started.
+<span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>Scanning &#39;E:\kaggle\pytorch-book\docs\yolo\face-mask\datasets\labels\train&#39; images and labels...682 found, 0 missing, 0 empty, 0 corrupted: 100
+<span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>New cache created: E:\kaggle\pytorch-book\docs\yolo\face-mask\datasets\labels\train.cache
+<span class=" -Color -Color-Bold -Color-Bold-Blue">val: </span>Scanning &#39;E:\kaggle\pytorch-book\docs\yolo\face-mask\datasets\labels\val&#39; images and labels...:   0%|                    | 0/166 [00:00&lt;?, ?it/s]
+</pre></div>
 </div>
 </div>
 </div>
@@ -723,11 +705,11 @@ commentsRunWhenDOMLoaded(addUtterances);
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="index.html" title="上一页 页">
+    <a class='left-prev' id="prev-link" href="00_loader.html" title="上一页 页">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">上一页</p>
-            <p class="prev-next-title">口罩识别</p>
+            <p class="prev-next-title">准备工作</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="test.html" title="下一页 页">

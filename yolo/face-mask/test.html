@@ -92,7 +92,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="参考" href="../../other/index.html" />
-    <link rel="prev" title="数据制作" href="00_dataset.html" />
+    <link rel="prev" title="模型训练" href="01_train.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh">
     
@@ -329,8 +329,13 @@ commentsRunWhenDOMLoaded(addUtterances);
     </label>
     <ul class="current">
      <li class="toctree-l3">
-      <a class="reference internal" href="00_dataset.html">
-       数据制作
+      <a class="reference internal" href="00_loader.html">
+       准备工作
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="01_train.html">
+       模型训练
       </a>
      </li>
      <li class="toctree-l3 current active">
@@ -571,58 +576,6 @@ Adding AutoShape...
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install -q roboflow
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
-WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
-WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
-WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
-WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
-WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs\torch\lib\site-packages)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">clear_output</span>  <span class="c1"># to display images</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setup complete. Using torch </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_properties</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;CPU&#39;</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Setup complete. Using torch 1.10.0 (NVIDIA GeForce GTX 1080 Ti)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">roboflow</span> <span class="kn">import</span> <span class="n">Roboflow</span>
-<span class="n">rf</span> <span class="o">=</span> <span class="n">Roboflow</span><span class="p">(</span><span class="n">model_format</span><span class="o">=</span><span class="s2">&quot;yolov5&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="s2">&quot;ultralytics&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">2</span><span class="n">f6135367ffe</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">roboflow</span> <span class="kn">import</span> <span class="n">Roboflow</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">rf</span> <span class="o">=</span> <span class="n">Roboflow</span><span class="p">(</span><span class="n">model_format</span><span class="o">=</span><span class="s2">&quot;yolov5&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="s2">&quot;ultralytics&quot;</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: __init__() got an unexpected keyword argument &#39;model_format&#39;
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -650,11 +603,11 @@ WARNING: Ignoring invalid distribution -pencv-python (c:\users\xinet\.conda\envs
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="00_dataset.html" title="上一页 页">
+    <a class='left-prev' id="prev-link" href="01_train.html" title="上一页 页">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">上一页</p>
-            <p class="prev-next-title">数据制作</p>
+            <p class="prev-next-title">模型训练</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../../other/index.html" title="下一页 页">
