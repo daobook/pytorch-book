@@ -627,7 +627,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 数据集根目录</span>
-<span class="n">root</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;E:\kaggle\datasets\face-mask-detection&quot;</span>
+<span class="n">root</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;/home/znjs/xinet/ai/face-mask-detection&quot;</span>
 <span class="c1"># 标签名称</span>
 <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;with_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;mask_weared_incorrect&#39;</span><span class="p">,</span> <span class="s1">&#39;without_mask&#39;</span><span class="p">]</span>
 </pre></div>
@@ -664,11 +664,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss330.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss241.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss697.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss571.png&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/images/maksssksksss311.png&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;/home/znjs/xinet/ai/face-mask-detection/images/maksssksksss753.png&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/images/maksssksksss18.png&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/images/maksssksksss76.png&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/images/maksssksksss581.png&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/images/maksssksksss17.png&#39;]
 </pre></div>
 </div>
 </div>
@@ -680,11 +680,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss330.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss241.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss697.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss571.xml&#39;,
- &#39;E:/kaggle/datasets/face-mask-detection/annotations/maksssksksss311.xml&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;/home/znjs/xinet/ai/face-mask-detection/annotations/maksssksksss753.xml&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/annotations/maksssksksss18.xml&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/annotations/maksssksksss76.xml&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/annotations/maksssksksss581.xml&#39;,
+ &#39;/home/znjs/xinet/ai/face-mask-detection/annotations/maksssksksss17.xml&#39;]
 </pre></div>
 </div>
 </div>
@@ -738,10 +738,10 @@ commentsRunWhenDOMLoaded(addUtterances);
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="s1">&#39;datasets&#39;</span>
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;yolov5l&#39;</span>
+<span class="n">config_name</span> <span class="o">=</span> <span class="s1">&#39;face-mask&#39;</span>
 <span class="c1"># 标签名称</span>
 <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;with_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;mask_weared_incorrect&#39;</span><span class="p">,</span> <span class="s1">&#39;without_mask&#39;</span><span class="p">]</span>
-<span class="n">make_yaml</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+<span class="n">make_yaml</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">config_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -759,6 +759,15 @@ commentsRunWhenDOMLoaded(addUtterances);
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>正克隆到 &#39;yolov5&#39;...
+remote: Enumerating objects: 10555, done.
+remote: Total 10555 (delta 0), reused 0 (delta 0), pack-reused 10555
+接收对象中: 100% (10555/10555), 10.74 MiB | 5.13 MiB/s, 完成.
+处理 delta 中: 100% (7292/7292), 完成.
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -772,16 +781,16 @@ commentsRunWhenDOMLoaded(addUtterances);
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "torch"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "torch",
+            kernelName: "python3",
             path: "./yolo/face-mask"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'torch'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
