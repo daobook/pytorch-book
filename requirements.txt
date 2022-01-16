@@ -3,7 +3,6 @@
 # matplotlib
 # ipywidgets
 jupyter-book
-# jupyter-cache[cli]
 # ghp-import
 sphinx-inline-tabs
 sphinx-click
@@ -12,4 +11,7 @@ sphinx-click
 # plotly
 # jupyter-dash
 # opencv-python
-tqdm
+# tqdm
+# pyyaml
+# scikit-learn
+sphinx>=4.3
