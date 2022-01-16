@@ -145,3 +145,19 @@ class ObjectPath(PathMeta):
         self._write_labels(self.labels_train, new_dir/'train')
         self._write_labels(self.labels_val, new_dir/'val')
         self._write_labels(self.labels_test, new_dir/'test')
+
+
+def make_yaml(root, names, config_name):
+    root = Path(root).absolute()
+    yaml_data = {
+        'path': root.as_posix(),
+        'train': 'images/train',
+        'val': 'images/val',
+        'test': 'images/test',
+        'nc': len(names),
+        'names': names
+    }
+    yaml_path = root/f'{config_name}.yaml'
+    with open(yaml_path, 'w') as f:
+        yaml.dump(yaml_data, f, explicit_start=True,
+                  default_flow_style=False)
