@@ -582,7 +582,7 @@ commentsRunWhenDOMLoaded(addUtterances);
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
 <h1>模型训练<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>可以使用 <a class="reference external" href="https://docs.wandb.ai/v/zh-hans/">Weights &amp; Biases</a> 可视化训练过程。</p>
 </div>
 <div class="cell docutils container">
@@ -797,6 +797,372 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!python yolov5/train.py --weights yolov5s.pt \
+        --cfg yolov5/models/yolov5s.yaml --data datasets/face_mask.yaml \
+        --hyp yolov5/data/hyps/hyp.scratch.yaml --epochs 20 --batch-size 16 \
+        --img-size 640 --device 0
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>weights=yolov5s.pt, cfg=yolov5/models/yolov5s.yaml, data=datasets/face_mask.yaml, hyp=yolov5/data/hyps/hyp.scratch.yaml, epochs=20, batch_size=16, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=yolov5/runs/train, name=exp, exist_ok=False, quad=False, linear_lr=False, label_smoothing=0.0, patience=100, freeze=[0], save_period=-1, local_rank=-1, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+<span class=" -Color -Color-Bold -Color-Bold-Blue">github: </span>remote: Enumerating objects: 88, done.
+remote: Counting objects: 100% (40/40), done.
+remote: Total 88 (delta 39), reused 39 (delta 39), pack-reused 48
+展开对象中: 100% (88/88), 77.54 KiB | 690.00 KiB/s, 完成.
+来自 https://github.com.cnpmjs.org/ultralytics/yolov5
+   436ffc4..bd815d4  master              -&gt; origin/master
+   322cdc0..4c9e629  classifier          -&gt; origin/classifier
+   e0e5471..dfff70b  feature/log_results -&gt; origin/feature/log_results
+   b63f2e7..bced04e  tests/aws           -&gt; origin/tests/aws
+⚠️ YOLOv5 is out of date by 13 commits. Use `git pull` or `git clone https://github.com.cnpmjs.org/ultralytics/yolov5` to update.
+YOLOv5 🚀 v6.0-192-g436ffc4 torch 1.10.1 CUDA:0 (NVIDIA GeForce RTX 2080 Ti, 11017MiB)
+
+<span class=" -Color -Color-Bold -Color-Bold-Blue">hyperparameters: </span>lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, cls_pw=1.0, obj=1.0, obj_pw=1.0, iou_t=0.2, anchor_t=4.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.0, copy_paste=0.0
+<span class=" -Color -Color-Bold -Color-Bold-Blue">Weights &amp; Biases: </span>run &#39;pip install wandb&#39; to automatically track and visualize YOLOv5 🚀 runs (RECOMMENDED)
+<span class=" -Color -Color-Bold -Color-Bold-Blue">TensorBoard: </span>Start with &#39;tensorboard --logdir yolov5/runs/train&#39;, view at http://localhost:6006/
+Overriding model.yaml nc=80 with nc=3
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1      3520  models.common.Conv                      [3, 32, 6, 2, 2]              
+  1                -1  1     18560  models.common.Conv                      [32, 64, 3, 2]                
+  2                -1  1     18816  models.common.C3                        [64, 64, 1]                   
+  3                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+  4                -1  2    115712  models.common.C3                        [128, 128, 2]                 
+  5                -1  1    295424  models.common.Conv                      [128, 256, 3, 2]              
+  6                -1  3    625152  models.common.C3                        [256, 256, 3]                 
+  7                -1  1   1180672  models.common.Conv                      [256, 512, 3, 2]              
+  8                -1  1   1182720  models.common.C3                        [512, 512, 1]                 
+  9                -1  1    656896  models.common.SPPF                      [512, 512, 5]                 
+ 10                -1  1    131584  models.common.Conv                      [512, 256, 1, 1]              
+ 11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
+ 12           [-1, 6]  1         0  models.common.Concat                    [1]                           
+ 13                -1  1    361984  models.common.C3                        [512, 256, 1, False]          
+ 14                -1  1     33024  models.common.Conv                      [256, 128, 1, 1]              
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
+ 16           [-1, 4]  1         0  models.common.Concat                    [1]                           
+ 17                -1  1     90880  models.common.C3                        [256, 128, 1, False]          
+ 18                -1  1    147712  models.common.Conv                      [128, 128, 3, 2]              
+ 19          [-1, 14]  1         0  models.common.Concat                    [1]                           
+ 20                -1  1    296448  models.common.C3                        [256, 256, 1, False]          
+ 21                -1  1    590336  models.common.Conv                      [256, 256, 3, 2]              
+ 22          [-1, 10]  1         0  models.common.Concat                    [1]                           
+ 23                -1  1   1182720  models.common.C3                        [512, 512, 1, False]          
+ 24      [17, 20, 23]  1     21576  models.yolo.Detect                      [3, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [128, 256, 512]]
+Model Summary: 270 layers, 7027720 parameters, 7027720 gradients, 15.9 GFLOPs
+
+Transferred 342/349 items from yolov5s.pt
+Scaled weight_decay = 0.0005
+<span class=" -Color -Color-Bold -Color-Bold-Blue">optimizer:</span> SGD with parameter groups 57 weight, 60 weight (no decay), 60 bias
+<span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>Scanning &#39;/home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/l
+<span class=" -Color -Color-Bold -Color-Bold-Blue">val: </span>Scanning &#39;/home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/lab
+Plotting labels to yolov5/runs/train/exp/labels.jpg... 
+
+<span class=" -Color -Color-Bold -Color-Bold-Blue">AutoAnchor: </span>5.62 anchors/target, 0.999 Best Possible Recall (BPR). Current anchors are a good fit to dataset ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to <span class=" -Color -Color-Bold">yolov5/runs/train/exp</span>
+Starting training for 20 epochs...
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      0/19     3.58G    0.1131   0.05222   0.03486        68       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884    0.00947     0.0138    0.00267   0.000498
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      1/19     4.94G    0.0933     0.063   0.02545        73       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884     0.0916     0.0944     0.0688     0.0172
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      2/19     4.94G   0.07394   0.05389   0.02129        50       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.831      0.164       0.17      0.054
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      3/19     4.94G   0.06533   0.04543   0.01878        67       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.815      0.159       0.14     0.0351
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      4/19     4.94G   0.07036   0.04271   0.01814        68       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.892      0.198      0.255      0.096
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      5/19     4.94G   0.06433   0.04089   0.01803       123       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.523      0.384      0.257     0.0788
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      6/19     4.94G   0.06153   0.03906    0.0164        32       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884       0.65      0.467      0.389      0.152
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      7/19     4.94G   0.05676   0.03784   0.01452       100       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.635      0.505      0.436      0.172
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      8/19     4.94G   0.05346   0.03642   0.01257        95       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884       0.76      0.513      0.534      0.243
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      9/19     4.94G   0.05129    0.0357   0.01037        71       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.798      0.457      0.506      0.224
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     10/19     4.94G   0.04717   0.03486  0.009747        76       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.879      0.542      0.592      0.292
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     11/19     4.94G   0.04849   0.03597  0.009019        97       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.749      0.475      0.507      0.232
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     12/19     4.94G   0.05122   0.03346  0.009238       134       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.779      0.497      0.524      0.208
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     13/19     4.94G   0.04728   0.03442  0.008275        97       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.798      0.517      0.547      0.248
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     14/19     4.94G   0.04292   0.03351  0.007889        85       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.925      0.541      0.614      0.334
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     15/19     4.94G   0.03947   0.03122  0.007894        61       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.941      0.526       0.62      0.317
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     16/19     4.94G   0.03768   0.03223  0.007455       112       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.895      0.571      0.625      0.332
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     17/19     4.94G     0.034   0.02953  0.007494        73       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.903      0.563      0.624      0.341
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     18/19     4.94G   0.03292   0.03066  0.006977        81       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.913      0.576      0.637      0.361
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     19/19     4.94G   0.03294   0.03055  0.007187        49       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.944      0.553      0.632      0.356
+
+20 epochs completed in 0.071 hours.
+Optimizer stripped from yolov5/runs/train/exp/weights/last.pt, 14.4MB
+Optimizer stripped from yolov5/runs/train/exp/weights/best.pt, 14.4MB
+
+Validating yolov5/runs/train/exp/weights/best.pt...
+Fusing layers... 
+Model Summary: 213 layers, 7018216 parameters, 0 gradients, 15.8 GFLOPs
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.912      0.576      0.637      0.361
+           with_mask        166        703      0.866      0.915      0.942      0.566
+mask_weared_incorrect        166         31          1          0      0.103     0.0604
+        without_mask        166        150      0.871      0.812      0.866      0.456
+Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!python yolov5/train.py --weights yolov5l.pt \
+        --cfg yolov5/models/yolov5l.yaml --data datasets/face_mask.yaml \
+        --hyp yolov5/data/hyps/hyp.scratch.yaml --epochs 20 --batch-size 16 \
+        --img-size 640 --device 0
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>weights=yolov5l.pt, cfg=yolov5/models/yolov5l.yaml, data=datasets/face_mask.yaml, hyp=yolov5/data/hyps/hyp.scratch.yaml, epochs=20, batch_size=16, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=yolov5/runs/train, name=exp, exist_ok=False, quad=False, linear_lr=False, label_smoothing=0.0, patience=100, freeze=[0], save_period=-1, local_rank=-1, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+<span class=" -Color -Color-Bold -Color-Bold-Blue">github: </span>⚠️ YOLOv5 is out of date by 13 commits. Use `git pull` or `git clone https://github.com.cnpmjs.org/ultralytics/yolov5` to update.
+YOLOv5 🚀 v6.0-192-g436ffc4 torch 1.10.1 CUDA:0 (NVIDIA GeForce RTX 2080 Ti, 11017MiB)
+
+<span class=" -Color -Color-Bold -Color-Bold-Blue">hyperparameters: </span>lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, cls_pw=1.0, obj=1.0, obj_pw=1.0, iou_t=0.2, anchor_t=4.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.0, copy_paste=0.0
+<span class=" -Color -Color-Bold -Color-Bold-Blue">Weights &amp; Biases: </span>run &#39;pip install wandb&#39; to automatically track and visualize YOLOv5 🚀 runs (RECOMMENDED)
+<span class=" -Color -Color-Bold -Color-Bold-Blue">TensorBoard: </span>Start with &#39;tensorboard --logdir yolov5/runs/train&#39;, view at http://localhost:6006/
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5l.pt to yolov5l.pt...
+100%|███████████████████████████████████████| 89.2M/89.2M [10:43&lt;00:00, 145kB/s]
+
+Overriding model.yaml nc=80 with nc=3
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1      7040  models.common.Conv                      [3, 64, 6, 2, 2]              
+  1                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+  2                -1  3    156928  models.common.C3                        [128, 128, 3]                 
+  3                -1  1    295424  models.common.Conv                      [128, 256, 3, 2]              
+  4                -1  6   1118208  models.common.C3                        [256, 256, 6]                 
+  5                -1  1   1180672  models.common.Conv                      [256, 512, 3, 2]              
+  6                -1  9   6433792  models.common.C3                        [512, 512, 9]                 
+  7                -1  1   4720640  models.common.Conv                      [512, 1024, 3, 2]             
+  8                -1  3   9971712  models.common.C3                        [1024, 1024, 3]               
+  9                -1  1   2624512  models.common.SPPF                      [1024, 1024, 5]               
+ 10                -1  1    525312  models.common.Conv                      [1024, 512, 1, 1]             
+ 11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
+ 12           [-1, 6]  1         0  models.common.Concat                    [1]                           
+ 13                -1  3   2757632  models.common.C3                        [1024, 512, 3, False]         
+ 14                -1  1    131584  models.common.Conv                      [512, 256, 1, 1]              
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, &#39;nearest&#39;]          
+ 16           [-1, 4]  1         0  models.common.Concat                    [1]                           
+ 17                -1  3    690688  models.common.C3                        [512, 256, 3, False]          
+ 18                -1  1    590336  models.common.Conv                      [256, 256, 3, 2]              
+ 19          [-1, 14]  1         0  models.common.Concat                    [1]                           
+ 20                -1  3   2495488  models.common.C3                        [512, 512, 3, False]          
+ 21                -1  1   2360320  models.common.Conv                      [512, 512, 3, 2]              
+ 22          [-1, 10]  1         0  models.common.Concat                    [1]                           
+ 23                -1  3   9971712  models.common.C3                        [1024, 1024, 3, False]        
+ 24      [17, 20, 23]  1     43080  models.yolo.Detect                      [3, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [256, 512, 1024]]
+Model Summary: 468 layers, 46149064 parameters, 46149064 gradients, 108.0 GFLOPs
+
+Transferred 606/613 items from yolov5l.pt
+Scaled weight_decay = 0.0005
+<span class=" -Color -Color-Bold -Color-Bold-Blue">optimizer:</span> SGD with parameter groups 101 weight, 104 weight (no decay), 104 bias
+<span class=" -Color -Color-Bold -Color-Bold-Blue">train: </span>Scanning &#39;/home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/l
+<span class=" -Color -Color-Bold -Color-Bold-Blue">val: </span>Scanning &#39;/home/znjs/xinet/ai/pytorch-book/docs/yolo/face-mask/datasets/lab
+Plotting labels to yolov5/runs/train/exp4/labels.jpg... 
+
+<span class=" -Color -Color-Bold -Color-Bold-Blue">AutoAnchor: </span>5.62 anchors/target, 0.999 Best Possible Recall (BPR). Current anchors are a good fit to dataset ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to <span class=" -Color -Color-Bold">yolov5/runs/train/exp4</span>
+Starting training for 20 epochs...
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      0/19     9.79G    0.1088   0.05686   0.03462        37       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884     0.0145     0.0313    0.00492   0.000918
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      1/19     9.57G   0.08972    0.0679   0.02605       107       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.752     0.0872     0.0603     0.0151
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      2/19     9.57G   0.07353   0.05557   0.02134        61       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884       0.86      0.182      0.224     0.0704
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      3/19     9.57G    0.0633   0.04309   0.02054        78       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.783      0.205      0.126     0.0282
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      4/19     9.57G   0.06721   0.04068   0.01996        50       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884       0.89      0.213      0.269     0.0863
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      5/19     9.57G   0.06042    0.0365   0.01942        61       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884       0.61      0.453      0.428      0.173
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      6/19     9.57G   0.05684   0.03533   0.01713        59       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.703      0.453      0.478      0.208
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      7/19     9.57G   0.05085   0.03479   0.01614        92       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.619      0.547      0.429      0.148
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      8/19     9.57G   0.04888   0.03178   0.01315        76       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.837      0.533      0.562      0.259
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      9/19     9.57G   0.04583   0.03067   0.01074        67       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.818      0.564      0.563      0.261
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     10/19     9.57G    0.0431   0.03149  0.009276        61       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.882      0.558      0.607      0.331
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     11/19     9.57G   0.04377   0.03365  0.008531        51       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.824      0.588      0.596      0.304
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     12/19     9.57G   0.04451   0.02935  0.007956        40       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.866      0.538      0.562      0.282
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     13/19     9.57G   0.04036   0.03029  0.007856        74       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.867      0.542      0.591      0.313
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     14/19     9.57G   0.03838   0.02983  0.007083        85       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.912      0.582      0.646      0.355
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     15/19     9.57G   0.03833   0.03113   0.00688        85       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.924      0.567      0.644      0.344
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     16/19     9.57G   0.03423   0.02863  0.006931        51       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.931      0.578      0.653      0.392
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     17/19     9.57G   0.03005   0.02873  0.006643        61       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884       0.93       0.58      0.666      0.416
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     18/19     9.57G   0.02857   0.02658  0.006363        90       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.915      0.591      0.665      0.409
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     19/19     9.57G   0.02887    0.0268  0.006263        59       640: 100%|███
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884      0.931       0.58      0.671      0.405
+
+20 epochs completed in 0.107 hours.
+Optimizer stripped from yolov5/runs/train/exp4/weights/last.pt, 92.8MB
+Optimizer stripped from yolov5/runs/train/exp4/weights/best.pt, 92.8MB
+
+Validating yolov5/runs/train/exp4/weights/best.pt...
+Fusing layers... 
+Model Summary: 367 layers, 46119048 parameters, 0 gradients, 107.8 GFLOPs
+               Class     Images     Labels          P          R     mAP@.5 mAP@
+                 all        166        884       0.93       0.58      0.666      0.416
+           with_mask        166        703      0.924      0.914      0.957      0.603
+mask_weared_incorrect        166         31          1          0      0.165      0.117
+        without_mask        166        150      0.867      0.827      0.876      0.527
+Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp -r yolov5/runs/train/exp3/weights/ submission/
 </pre></div>
 </div>
@@ -825,7 +1191,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_8_0.jpg" src="../../_images/01_train_8_0.jpg" />
+<img alt="../../_images/01_train_10_0.jpg" src="../../_images/01_train_10_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -835,7 +1201,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_9_0.png" src="../../_images/01_train_9_0.png" />
+<img alt="../../_images/01_train_11_0.png" src="../../_images/01_train_11_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -845,7 +1211,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_10_0.png" src="../../_images/01_train_10_0.png" />
+<img alt="../../_images/01_train_12_0.png" src="../../_images/01_train_12_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -855,7 +1221,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_11_0.png" src="../../_images/01_train_11_0.png" />
+<img alt="../../_images/01_train_13_0.png" src="../../_images/01_train_13_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -865,7 +1231,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_12_0.jpg" src="../../_images/01_train_12_0.jpg" />
+<img alt="../../_images/01_train_14_0.jpg" src="../../_images/01_train_14_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -875,7 +1241,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_13_0.png" src="../../_images/01_train_13_0.png" />
+<img alt="../../_images/01_train_15_0.png" src="../../_images/01_train_15_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -885,7 +1251,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_14_0.jpg" src="../../_images/01_train_14_0.jpg" />
+<img alt="../../_images/01_train_16_0.jpg" src="../../_images/01_train_16_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -895,7 +1261,7 @@ Results saved to <span class=" -Color -Color-Bold">yolov5/runs/train/exp3</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01_train_15_0.jpg" src="../../_images/01_train_15_0.jpg" />
+<img alt="../../_images/01_train_17_0.jpg" src="../../_images/01_train_17_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
